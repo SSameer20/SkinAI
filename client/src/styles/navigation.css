@@ -1,0 +1,36 @@
+.navigation{
+    max-width: 99vw;
+    background-color: aqua;
+    height: 10vh;
+    
+}
+
+.navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.logo img{
+    max-height: 5vh;
+    max-width: 5vh;
+}
+
+.menu ul{
+    list-style-type: none;
+     display: flex;
+     align-items: center;
+    gap: 10px;
+}
+
+.menu ul li > *{
+    text-decoration: none;
+    color: aliceblue;
+}
+
+.navigation-profile{
+    max-width: 5vh;
+    max-height: 5vh;
+}
+
