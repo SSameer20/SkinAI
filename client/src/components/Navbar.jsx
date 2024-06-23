@@ -1,10 +1,15 @@
 import "../styles/navigation.css"
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from "react-router-dom"
 import Logo from "../media/AI_Skin_Logo.png"
 import Profile from "../media/profile.png"
 
 export default function Navbar() {
+  const [log, setLog] = useState(false)
+
+  const profileButton = () => {
+    setLog(!log)
+  }
   return (
     <div className="navigation">
       <div className="navbar">
@@ -17,17 +22,19 @@ export default function Navbar() {
               <Link to="/"> Menu</Link>
             </li>
             <li>
-              <Link to="/">Test</Link>
+              <Link to="/test">Test</Link>
             </li>
             <li>
-              <Link to="/">Contact</Link>
+              <Link to="/contact">Contact</Link>
             </li>
 
             <li>
-              <Link to="/">About</Link>
+              <Link to="/about">About</Link>
             </li>
-
-            <img src={Profile} alt="" srcset="" className="navigation-profile" />
+            <div className="image">
+              <img src={Profile} alt="" srcset="" className="navigation-profile" onClick={profileButton}/>
+              <button className="profile-logout-button" onClick={profileButton} style={log===true ? {display : "block"} : {display : "none"}}>Logout</button>
+            </div>
           </ul>
         </div>
       </div>

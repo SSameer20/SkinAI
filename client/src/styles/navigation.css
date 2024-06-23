@@ -1,6 +1,6 @@
 .navigation{
-    max-width: 99vw;
-    background-color: aqua;
+    max-width: 100vw;
+    /* background-color: rgb(98, 101, 101); */
     height: 10vh;
     
 }
@@ -34,3 +34,22 @@
     max-height: 5vh;
 }
 
+
+.image{
+    position: relative;
+    width: 100px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: start;
+    /* background-color: blue; */
+    padding: 10px 5px;
+
+}
+
+.profile-logout-button{
+    width: 100%;
+    display: none;
+}

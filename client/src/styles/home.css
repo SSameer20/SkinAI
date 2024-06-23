@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap');
+
+.home {
+    max-width: 100vw;
+    background-image: url("../media/background.avif");
+    /* opacity: 0.4 ; */
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-size: 100%;
+    overflow-y: hidden;
+    
+}
+
+
+.home-page-introduction {
+    color: white;
+    font-family: "Oswald", sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: -10px;
+    margin: 10vh 0 0 20vw;
+}
+
+.home-page-introduction h1{
+    font-size: 80px;
+    letter-spacing: 5px;
+}
+
+.home-page-introduction span{
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin: -50px 0;
+}
