@@ -1,0 +1,36 @@
+.authentication{
+    max-width: 100vw;
+    height: 100vh;
+    background-image: url("../media/website-background-login.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.login-box{
+    width: 50vw;
+    height: auto;
+    background-color: aliceblue;
+    border-radius: 5px;
+}
+
+#form-field{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+.form-title{
+text-align: center;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin: 10px;
+}
