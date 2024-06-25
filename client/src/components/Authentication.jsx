@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import "../styles/authentication.css"
+import axios from 'axios'
 
 export default function Authentication() {
   const navigate = useNavigate();
@@ -8,7 +9,15 @@ export default function Authentication() {
   const [password, setPassword] = useState("");
 
   const loginBtn = (e) => {
-    console.log(email + " " + password)
+    axios.post("http://localhost:3001/home/login",{
+      Email : email,
+      Password : password
+    })
+    .then(data => console.log(data))
+    .error(er => console.log("Error"));
+
+
+
     navigate("/app")
   }
 
