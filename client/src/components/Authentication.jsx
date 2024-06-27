@@ -8,17 +8,30 @@ export default function Authentication() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const loginBtn = (e) => {
-    axios.post("http://localhost:3001/home/login",{
-      Email : email,
-      Password : password
-    })
-    .then(data => console.log(data))
-    .error(er => console.log("Error"));
+  const loginBtn = async (e) => {
+    e.preventDefault()
 
+    try {
+      const response = await axios.post("http://localhost:3001/home/login",{
+        Email : email,
+        Password : password
+      })
 
+      console.log(response.data)
+      if(response.status === 200){
+        navigate("/app")
+      }
+      else{
+        alert("Wrong Credentials")
+      }
+      
+    } catch (error) {
+      alert("Error While Working")
+      
+    }
+    
+    
 
-    navigate("/app")
   }
 
   return (
