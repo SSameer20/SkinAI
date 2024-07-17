@@ -1,4 +1,6 @@
-# Software Requirements Specification (SRS) for SkinAI
+![banner](./assets/banner.gif)
+
+## Software Requirements Specification (SRS) for SkinAI
 
 ## 1. Introduction
 ### 1.1 Purpose

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Server Page</title>
+  <title>Server | SkinAI</title>
   <style>
     body{
         background-color: cornflowerblue;
@@ -21,15 +21,70 @@
         /*animation: spin 2s linear infinite;*/
     }
 
+
      /*@keyframes spin {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
       } */
+        .methods{
+          display: flex;
+          gap: 20px;
+          flex-wrap: wrap;
+         
+        }
+      .getMethod{
+        background-color: aliceblue;
+        padding: 10px;
+      }
+      .getMethod ul{
+        list-style-type:decimal;
+
+      }
+
+      .getMethod ul li span{
+        background-color: brown;
+        padding: 5px 10px;
+        color: aliceblue;
+        border-radius: 5px;
+      }
+
+      .postMethod{
+        background-color: aliceblue;
+        padding: 10px;
+      }
+      .postMethod ul{
+        list-style-type:decimal;
+
+      }
+
+      .postMethod ul li span{
+        background-color: brown;
+        padding: 5px 10px;
+        color: aliceblue;
+        border-radius: 5px;
+      }
   </style>
 </head>
 <body>
   <h1>Welcome to the Server!</h1>
   <!-- <span id="loader"></span>  -->
+ <div class="methods">
+  <aside class="getMethod">
+    <p>GET Methods</p>
+    <ul>
+      <li><span>/</span><p>Home Route to this page</p></li>
+      <li><span>/doc</span><p>Download SRS Socument of the Project</p></li>
+    </ul>
+  </aside>
+
+  <aside class="postMethod">
+    <p>POST Methods</p>
+    <ul>
+      <li><span>/user/register</span><p>Registering a user</p></li>
+      <li><span>/user/login</span><p>Login a user</p></li>
+    </ul>
+  </aside>
+ </div>
   
 </body>
 </html>
