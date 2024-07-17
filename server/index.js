@@ -28,7 +28,7 @@ app.get("/doc",(req, res) => {
 
 // POST Routes
 
-app.post("/home/login", (req, res) => {
+app.post("/user/login", (req, res) => {
     const {Email, Password} = req.body;
     console.log(Email + " " + Password);
     res.status(200).send({msg : "Successfull"})

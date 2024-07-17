@@ -12,7 +12,7 @@ export default function Authentication() {
     e.preventDefault()
 
     try {
-      const response = await axios.post("http://localhost:3001/home/login",{
+      const response = await axios.post("http://localhost:3001/user/login",{
         Email : email,
         Password : password
       })
@@ -26,12 +26,8 @@ export default function Authentication() {
       }
       
     } catch (error) {
-      alert("Error While Working")
-      
+      alert("Error While Working") 
     }
-    
-    
-
   }
 
   return (
