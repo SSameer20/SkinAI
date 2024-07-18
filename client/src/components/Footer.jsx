@@ -8,8 +8,9 @@ export default function
   return (
     <footer className="footer">
     <div className="contributions" style={{display : "flex", flexDirection : "row",justifyContent : "center", alignContent : "center"}}>
-        <p>You can report issues or <a href='https://github.com/SSameer20/SkinAI' target='_blank'>
-          <button id='btn' style={{ display : "flex", flexDirection : "row",justifyContent : "center", alignContent : "center"}}><p>contribute</p><img src='https://www.svgrepo.com/show/349595/external-link.svg'  alt='Link' style={{maxHeight : "20px"}}/></button></a></p>
+        <p>You can <a href='https://github.com/SSameer20/SkinAI' target='_blank'> Contribute </a> to the project
+          {/* <button id='btn' style={{ display : "flex", flexDirection : "row",justifyContent : "center", alignContent : "center"}}><p>contribute</p><img src='https://www.svgrepo.com/show/349595/external-link.svg'  alt='Link' style={{maxHeight : "20px"}}/></button></a> */}
+          </p>
     </div>
       
         <div className="copyright">
