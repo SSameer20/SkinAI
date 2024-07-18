@@ -1,55 +1,77 @@
-.navigation{
-    max-width: 100vw;
-    /* background-color: rgb(98, 101, 101); */
-    height: 10vh;
-    
-}
-
-.navbar{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.logo img{
-    max-height: 5vh;
-    max-width: 5vh;
-}
-
-.menu ul{
-    list-style-type: none;
-     display: flex;
-     align-items: center;
-    gap: 10px;
-}
-
-.menu ul li > *{
-    text-decoration: none;
-    color: aliceblue;
-}
-
-.navigation-profile{
-    max-width: 5vh;
-    max-height: 5vh;
-}
-
-
-.image{
-    position: relative;
-    width: 100px;
-    height: auto;
+nav{
     display: flex;
     flex-direction: column;
-    gap: 10px;
     justify-content: center;
-    align-items: start;
-    /* background-color: blue; */
-    padding: 10px 5px;
+    align-items: center;
+    background-color: rgba(10, 35, 56, 0.6);
+    color: white;
+    max-width: 60vw;
+    height: 10vh;
+    border-radius: 20px;
+    margin: 10px 20vw;
+
 
 }
 
-.profile-logout-button{
-    width: 100%;
-    display: none;
+
+nav:hover{
+    border: 1px solid transparent;
+    animation: navBorder 0.8s infinite
+
+}
+
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    list-style-type: none;
+    gap: 50px;
+}
+
+ul li > *{
+     text-decoration: none;
+     color: white;
+}
+
+
+/*  Animations */
+
+
+
+@keyframes navBorder {
+    0% {
+        border-top-color: rgb(232, 154, 228);
+    }
+
+    50%{
+        border-left-color: rgb(232, 154, 228);
+ 
+    }
+    75% {
+        border-bottom-color: rgb(232, 154, 228);
+    }
+
+    100%{
+        border-right-color: rgb(232, 154, 228);
+ 
+    }  
+}
+
+@media screen and (max-width : 500px) {
+    nav ul li > * {
+        font-size: small;
+    }
+
+    nav ul {
+        gap: 10px;
+    }
+    nav {
+        padding: 0 10px;
+    }
+
+    nav ul img{
+        padding: 10px;
+    }
 }

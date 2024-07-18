@@ -1,6 +1,6 @@
 .footer{
     max-width: 100vw;
-    background-color: rgb(98, 101, 101);
+    background-color: #0C0C0C;
     height: 20vh;
     display: flex;
     flex-direction: column;
@@ -8,3 +8,18 @@
     align-items: center;
     color: aliceblue;
 }
+
+#btn{
+    padding: 0px 5px;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 30px; */
+}
+
+#btn span{
+    /* height: 30px; */
+    background-color: blueviolet;
+}
+
