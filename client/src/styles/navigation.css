@@ -75,3 +75,52 @@ ul li > *{
         padding: 10px;
     }
 }
+
+.user-log{
+    display: flex;
+    flex-direction: column;
+}
+
+.click{
+    position: fixed;
+    right: 0px;
+    background-color: aliceblue;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100vh;
+    margin-top: 87vh;
+    z-index: 10;
+    /* border-radius: 20px; */
+    justify-content: center;
+    align-items: center;
+}
+
+.click img{
+    max-height: 10vh;
+    max-width: 10vh;
+    cursor: pointer;
+}
+
+.user_log{
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+.user_log span{
+    text-align: center;
+    padding: 5px 1px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 800;
+    background-color: rgb(183, 87, 87);
+    cursor: pointer;
+
+}
+.notClick{
+    background-color: none;
+
+}
+

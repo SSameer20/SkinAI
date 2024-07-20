@@ -5,18 +5,25 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Authentication from './components/Authentication';
 import App from './App';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import Test from "./components/Test"
+import About from "./components/About"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <Routes>
-      <Route path="/auth" element={<Authentication/>} />
-      <Route path="/" element={<App/>} />
-      
-
-    </Routes>
      
+      <Routes>
+        <Route path="/auth" element={<Authentication />} />
+        <Route path="/" element={<App />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/test" element={<Test />} />
+          <Route path="/about" element={<About />} />
+        </Route>
+      </Routes>
+
     </BrowserRouter>
 
   </React.StrictMode>
