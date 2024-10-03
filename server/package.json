@@ -1,15 +1,23 @@
 {
   "name": "server",
   "version": "0.0.1",
+<<<<<<< HEAD
   "description": "node server for handling backend",
+=======
+  "description": "backend server",
+>>>>>>> db3c586a2c24959e97d5770290afdc6f0340877d
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
+<<<<<<< HEAD
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.0"
   }
+=======
+  "license": "ISC"
+>>>>>>> db3c586a2c24959e97d5770290afdc6f0340877d
 }
