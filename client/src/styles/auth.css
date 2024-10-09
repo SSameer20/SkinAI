@@ -1,0 +1,29 @@
+.card1 {
+  /* background-color: red; */
+  position: absolute;
+  border: 1px solid red;
+  border-radius: 38% 62% 63% 37% / 44% 49% 56% 59%;
+  box-shadow: 0 0 50px 0px blue, inset 0 0 30px 0px #dd58d6;
+  animation: anim 4s linear infinite; /* Changed '1' to 'infinite' for infinite iterations */
+}
+
+.card2 {
+  /* background-color: red; */
+  position: absolute;
+  border: 1px solid red;
+  border-radius: 68% 36% 37% 69% / 44% 49% 56% 59%;
+  box-shadow: 0 0 50px 0px #dd58d6, inset 0 0 30px 0px blue;
+  animation: anim 4s linear infinite;
+}
+
+@keyframes anim {
+  0% {
+    transform: rotate(0deg); /* Corrected 'tranform' to 'transform' */
+  }
+  50% {
+    transform: rotate(180deg); /* Changed second 'from' to 'to' */
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
