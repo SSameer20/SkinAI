@@ -14,7 +14,7 @@ createRoot(document.getElementById("root")!).render(
       <NextUIProvider>
         <main
           className={
-            "text-foreground bg-[#252222] h-screen w-full overflow-hidden text-white"
+            "text-foreground bg-[#252222] w-[100vw] overflow-hidden text-white"
           }
         >
           <Routes>
