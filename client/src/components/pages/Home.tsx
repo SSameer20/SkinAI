@@ -2,8 +2,10 @@
 import { motion } from "framer-motion";
 import WordRotate from "../ui/word-rotate";
 import { Button } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import HeroVideoDialog from "../ui/hero-video-dialog";
+import { Routes } from "../utilities/Routes";
 import { ReverseMarquee, StraightMarquee } from "../utilities/ReviewsMarquee";
 import { cn } from "@/lib/utils";
 // import Marquee from "../ui/marquee";
@@ -57,6 +59,7 @@ const ActionLabel = (props: ActionLabel) => {
 };
 
 export default function Home() {
+  const navigate = useNavigate();
   const [screen, setScreen] = useState<{ w: number; h: number }>({
     w: window.innerWidth,
     h: window.innerHeight,
@@ -103,6 +106,7 @@ export default function Home() {
               borderRadius: "10px",
               padding: "5px 10px",
             }}
+            onClick={() => navigate(Routes.AUTH)}
           >
             Register
           </button>
@@ -115,6 +119,7 @@ export default function Home() {
               borderRadius: "10px",
               padding: "5px 10px",
             }}
+            onClick={() => navigate(Routes.AUTH)}
           >
             Login
           </button>

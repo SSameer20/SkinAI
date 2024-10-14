@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { Input, Button } from "@nextui-org/react";
 import "../../styles/auth.css";
 
 export default function Auth() {
   //   const navigate = useNavigate();
   const [form, setForm] = useState<boolean>(true);
-  const [load, setLoad] = useState<boolean>(false);
+  // const [load, setLoad] = useState<boolean>(false);
   const [screen, setScreen] = useState<{ w: number; h: number }>({
     w: window.innerWidth,
     h: window.innerHeight,
@@ -33,8 +33,6 @@ export default function Auth() {
       <div
         className="absolute card1 z-1"
         style={{
-          //   height: window.innerWidth >= 800 ? "60vh" : "40vh",
-          //   width: window.innerWidth >= 800 ? "30vw" : "60vw",
           height: screen.w <= 420 ? "40vh" : "60vh",
           width: screen.w <= 420 ? "40vh" : "60vh",
         }}
@@ -136,7 +134,7 @@ export default function Auth() {
               //     required: "Please confirm your password",
               //   })}
             />
-            <Button type="submit" color="primary" isLoading={load}>
+            <Button type="submit" color="primary">
               Register
             </Button>
           </form>
