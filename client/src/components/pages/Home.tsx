@@ -86,7 +86,7 @@ export default function Home() {
         <motion.div
           className="absolute top-5 left-5"
           initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
+          animate={{ y: 10, opacity: 1 }}
           transition={{ duration: 1, delay: 0 }}
         >
           <span className="text-[20px] font-bold text-[#FFFFFF]]">SKIN.</span>
@@ -140,7 +140,7 @@ export default function Home() {
         />
         <motion.div
           initial={{ y: 0, opacity: 0 }}
-          animate={{ y: screen.w <= 420 ? -20 : -70, opacity: 1 }}
+          animate={{ y: screen.w <= 420 ? -100 : -70, opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
           <ActionLabel content="Remote Health Care" />
@@ -148,7 +148,7 @@ export default function Home() {
         <motion.div
           initial={{ y: 0, opacity: 0 }}
           animate={{
-            y: screen.w <= 420 ? -10 : -70,
+            y: screen.w <= 420 ? -100 : -70,
             opacity: 1,
           }}
           transition={{ duration: 1, delay: 0.5 }}
@@ -167,7 +167,7 @@ export default function Home() {
             opacity: 0,
           }}
           animate={{
-            y: screen.w <= 420 ? -120 : 20,
+            y: screen.w <= 420 ? -50 : 20,
             opacity: 1,
           }}
           transition={{ duration: 1, delay: 1 }}
@@ -183,7 +183,7 @@ export default function Home() {
         <motion.div
           initial={{ y: screen.w <= 420 ? 120 : 80, opacity: 0 }}
           animate={{
-            y: screen.w <= 420 ? 60 : 20,
+            y: screen.w <= 420 ? -20 : 20,
             opacity: 1,
           }}
           transition={{ duration: 1, delay: 1.2 }}
