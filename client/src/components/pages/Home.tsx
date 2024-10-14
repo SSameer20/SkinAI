@@ -140,7 +140,7 @@ export default function Home() {
         />
         <motion.div
           initial={{ y: 0, opacity: 0 }}
-          animate={{ y: screen.w <= 420 ? -50 : -70, opacity: 1 }}
+          animate={{ y: screen.w <= 420 ? -20 : -70, opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
         >
           <ActionLabel content="Remote Health Care" />
@@ -148,7 +148,7 @@ export default function Home() {
         <motion.div
           initial={{ y: 0, opacity: 0 }}
           animate={{
-            y: screen.w <= 420 ? -50 : -70,
+            y: screen.w <= 420 ? -10 : -70,
             opacity: 1,
           }}
           transition={{ duration: 1, delay: 0.5 }}
@@ -181,29 +181,15 @@ export default function Home() {
           />
         </motion.span>
         <motion.div
-          initial={{ y: screen.w <= 420 ? 70 : 80, opacity: 0 }}
+          initial={{ y: screen.w <= 420 ? 120 : 80, opacity: 0 }}
           animate={{
-            y: screen.w <= 420 ? 25 : 20,
+            y: screen.w <= 420 ? 60 : 20,
             opacity: 1,
           }}
           transition={{ duration: 1, delay: 1.2 }}
         >
           <Button color="secondary">Take Assist</Button>
         </motion.div>
-        {screen.w <= 420 && (
-          <motion.div
-            className="w-full overflow-x-hidden"
-            initial={{ y: screen.w <= 420 ? 300 : 80, opacity: 0 }}
-            animate={{
-              y: screen.w <= 420 ? 200 : 20,
-              opacity: 1,
-            }}
-            transition={{ duration: 1, delay: 1.2 }}
-          >
-            <ReverseMarquee />
-            <StraightMarquee />
-          </motion.div>
-        )}
       </div>
 
       <div className="relative w-[100%] h-[100vh] overflow-y-hidden flex flex-col items-center justify-start gap-[10vh]">
@@ -252,20 +238,18 @@ export default function Home() {
           />
         </motion.div>
       </div>
-      <div className="relative flex flex-col justify-center items-center items-center w-full h-[100vh] overflow-x-hidden ">
-        {screen.w > 420 && (
-          <motion.div
-            initial={{ y: screen.w <= 420 ? 0 : 80, opacity: 0 }}
-            animate={{
-              y: screen.w <= 420 ? 150 : 20,
-              opacity: 1,
-            }}
-            transition={{ duration: 1, delay: 1.2 }}
-          >
-            <StraightMarquee />
-            <ReverseMarquee />
-          </motion.div>
-        )}
+      <div className="relative flex flex-col justify-center items-start w-full h-[100vh] overflow-x-hidden ">
+        <motion.div
+          initial={{ y: screen.w <= -200 ? 0 : 80, opacity: 0 }}
+          animate={{
+            y: screen.w <= 420 ? -250 : 20,
+            opacity: 1,
+          }}
+          transition={{ duration: 1, delay: 1.2 }}
+        >
+          <StraightMarquee />
+          <ReverseMarquee />
+        </motion.div>
       </div>
     </div>
   );
