@@ -19,7 +19,7 @@
 - **NodeMailer**
 ## Contributing
 
-We welcome contributions from the community! Please follow these steps to contribute:
+We welcome contributions from the community! Please follow these steps to [contribute](./CONTRIBUTING.md)
 
 
 ## Contact
