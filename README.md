@@ -16,6 +16,7 @@
 ### Tools & Libraries
 - **VSCode**
 - **Git**
+- **NodeMailer**
 ## Contributing
 
 We welcome contributions from the community! Please follow these steps to contribute:
