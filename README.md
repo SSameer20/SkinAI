@@ -5,18 +5,14 @@
 ## Tech Stack
 
 ### Frontend
-- **React**
-- **TypeScript**
+- **React**, **TypeScript**
 ### Backend
-- **Python**
-- **NodeJs**
+- **Python**, **NodeJs**
 ### Database
 - **MongoDB**
 
 ### Tools & Libraries
-- **VSCode**
-- **Git**
-- **NodeMailer**
+- **VSCode**, **Git**, **NodeMailer**
 ## Contributing
 
 We welcome contributions from the community! Please follow these steps to [contribute](./CONTRIBUTING.md)
