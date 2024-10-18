@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const UserRouter = require("./routes/UserRoutes");
+const { template } = require("./templates/server");
 require("dotenv").config();
 
 const app = express();
@@ -24,6 +25,10 @@ mongoose
   .connect(mongoURI)
   .then(() => console.log("MongoDB connected!"))
   .catch((err) => console.error("MongoDB connection error:", err));
+
+app.get("/", (req, res) => {
+  res.send(template);
+});
 
 // Start the server
 const PORT = process.env.PORT || 8080;
