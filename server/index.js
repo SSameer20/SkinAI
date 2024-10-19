@@ -8,7 +8,11 @@ require("dotenv").config();
 const app = express();
 
 // Middleware setup
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 app.use(bodyParser.json());
 
 /** User Routes */
