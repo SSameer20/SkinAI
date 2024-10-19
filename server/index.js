@@ -9,7 +9,24 @@ require("dotenv").config();
 const app = express();
 
 // Middleware setup
-app.use(cors());
+const allowedOrigins = [
+  "http://localhost:5173", // Local development
+  "https://skin-ai-seven.vercel.app", // Production frontend
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true,
+};
+
+app.use(cors(cors(corsOptions)));
 app.use(bodyParser.json());
 
 /** User Routes */
