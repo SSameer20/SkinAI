@@ -14,12 +14,7 @@ export default function Auth() {
     w: window.innerWidth,
     h: window.innerHeight,
   });
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<AuthForm>();
+  const { register, handleSubmit, reset } = useForm<AuthForm>();
   const handleResize = () => {
     setScreen({ w: window.innerWidth, h: window.innerHeight });
   };
@@ -40,6 +35,7 @@ export default function Auth() {
 
   const handleLogin = async (data: AuthForm) => {
     try {
+      setLoad(true);
       const response = await axios.post(
         "https://skin-ai-api.vercel.app/api/v1/user/login",
         {
@@ -50,16 +46,19 @@ export default function Auth() {
 
       if (response.status === 201) {
         alert("Success");
+        return navigate("/app");
       }
     } catch (error) {
       console.error("Login failed:", error);
     } finally {
       reset();
+      setLoad(false);
     }
   };
 
   const handleRegister = async (data: AuthForm) => {
     try {
+      setLoad(true);
       if (
         !data.email ||
         !data.password ||
@@ -83,6 +82,7 @@ export default function Auth() {
       console.log("error");
     } finally {
       reset();
+      setLoad(false);
     }
   };
 
@@ -156,7 +156,7 @@ export default function Auth() {
               label="Password"
               {...register("password", { required: "Password is required" })}
             />
-            <Button type="submit" color="primary">
+            <Button type="submit" color="primary" isLoading={load}>
               Login
             </Button>
           </form>
@@ -188,7 +188,7 @@ export default function Auth() {
                 required: "Please confirm your password",
               })}
             />
-            <Button type="submit" color="primary">
+            <Button type="submit" color="primary" isLoading={load}>
               Register
             </Button>
           </form>
