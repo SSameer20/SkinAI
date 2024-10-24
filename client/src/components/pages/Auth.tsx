@@ -37,7 +37,7 @@ export default function Auth() {
     try {
       setLoad(true);
       const response = await axios.post(
-        "https://skin-ai-api.vercel.app/api/v1/user/login",
+        "http://localhost:8080/api/v1/user/login",
         {
           email: data.email,
           password: data.password,
@@ -68,7 +68,7 @@ export default function Auth() {
       )
         return alert("All fields are required");
       await axios
-        .post("/server/api/v1/user/register", {
+        .post("http://localhost:8080/api/v1/user/register", {
           email: data.email,
           password: data.password,
           name: data.fullName,

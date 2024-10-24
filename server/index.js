@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+const ConnectDB = require("./db.config");
 const UserRouter = require("./routes/UserRoutes");
 const { template } = require("./templates/server");
 require("dotenv").config();
@@ -10,8 +10,8 @@ const app = express();
 
 // Middleware setup
 const allowedOrigins = [
-  "http://localhost:5173", // Local development
-  "https://skin-ai-seven.vercel.app", // Production frontend
+  "http://localhost:5173",
+  "https://skin-ai-seven.vercel.app",
 ];
 
 const corsOptions = {
@@ -32,23 +32,15 @@ app.use(bodyParser.json());
 /** User Routes */
 app.use("/api/v1/user", UserRouter);
 
-/**
- * MongoDB connection string from environment variables
- * @MongoURI connection string to connect project with MongoDB
- */
-
-const mongoURI = process.env.MONGO_URI;
-mongoose
-  .connect(mongoURI)
-  .then(() => console.log("MongoDB connected!"))
-  .catch((err) => console.error("MongoDB connection error:", err));
-
 app.get("/", (req, res) => {
   res.send(template);
 });
 
 // Start the server
 const PORT = process.env.PORT || 8080;
+const mongoURI = process.env.MONGO_URI;
+
 app.listen(PORT, () => {
+  ConnectDB(mongoURI);
   console.log(`Server running at http://localhost:${PORT}/`);
 });

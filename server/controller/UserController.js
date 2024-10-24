@@ -40,7 +40,6 @@ const UserLogin = async (req, res) => {
     <h3>Login Details:</h3>
    <p>Email Address:  ${user.email}</p>
     <p>Login Time: ${new Date()}</p>
-    <p>Ip Address : ${req.rawHeaders[11]}</p>
     </div>
     <p>Thank you for reading!</p>
   </body>
