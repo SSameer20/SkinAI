@@ -86,7 +86,7 @@ export default function App() {
             : {
                 marginTop: "-10vh",
                 fontSize: "20px",
-                letterSpacing: "4vw",
+                letterSpacing: "3vw",
               }
         }
       >
