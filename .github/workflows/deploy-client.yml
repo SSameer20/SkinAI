@@ -1,0 +1,22 @@
+name: Deploy Client
+
+on:
+  push:
+    paths:
+      - 'client/**'  # Trigger only if files in the `client` directory change
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}  # Add your Vercel token in GitHub secrets
+        run: |
+          npm install -g vercel
+          cd client  # Navigate to client directory
+          vercel --prod --token $VERCEL_TOKEN
