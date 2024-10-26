@@ -1,4 +1,4 @@
-const template = `<!DOCTYPE html>
+const Template = `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -42,5 +42,4 @@ const template = `<!DOCTYPE html>
   </body>
 </html>
 `;
-
-module.exports = { template };
+module.exports = Template;

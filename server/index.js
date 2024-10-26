@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const ConnectDB = require("./db.config");
 const UserRouter = require("./routes/UserRoutes");
-const { template } = require("./templates/server");
+const Template = require("./templates/serverTemplate");
 require("dotenv").config();
 
 const app = express();
@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 app.use("/api/v1/user", UserRouter);
 
 app.get("/", (req, res) => {
-  res.send(template);
+  res.sendFile(Template);
 });
 
 // Start the server
