@@ -3,37 +3,19 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const ConnectDB = require("./db.config");
 const UserRouter = require("./routes/UserRoutes");
-const Template = require("./templates/serverTemplate");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
 
-// Middleware setup
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://skin-ai-seven.vercel.app",
-];
-
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true,
-};
-
-app.use(cors(cors(corsOptions)));
+app.use(cors());
 app.use(bodyParser.json());
 
 /** User Routes */
 app.use("/api/v1/user", UserRouter);
 
 app.get("/", (req, res) => {
-  res.sendFile(Template);
+  res.sendFile(path.join(__dirname, "templates", "serverTemplate.html")); // Make sure this path is correct
 });
 
 // Start the server
