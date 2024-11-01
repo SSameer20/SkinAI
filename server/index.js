@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const ConnectDB = require("./db.config");
+const ConnectDB = require("./lib/db.config");
 const UserRouter = require("./routes/UserRoutes");
+const SubscriberRouter = require("./routes/SubscriberRoutes");
 const path = require("path");
 require("dotenv").config();
 
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 /** User Routes */
+app.use("/api/v0/launch", SubscriberRouter);
 app.use("/api/v1/user", UserRouter);
 
 app.get("/", (req, res) => {
