@@ -13,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 /** User Routes */
-app.use("/api/v0/launch", SubscriberRouter);
+app.use("/api/v1/launch", SubscriberRouter);
 app.use("/api/v1/user", UserRouter);
 
 app.get("/", (req, res) => {

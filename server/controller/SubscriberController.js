@@ -41,4 +41,13 @@ const SubscriberRegister = async (req, res) => {
   }
 };
 
-module.exports = { SubscriberRegister };
+const AllSubscribers = async (req, res) => {
+  try {
+    const users = await Subscriber.find();
+    return res.status(200).send({ subscribers: users });
+  } catch (error) {
+    return res.status(500).send({ message: error });
+  }
+};
+
+module.exports = { SubscriberRegister, AllSubscribers };

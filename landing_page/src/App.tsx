@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
+import axios from "axios";
 interface ScreenSize {
   width: number;
   height: number;
@@ -12,6 +13,26 @@ export default function App() {
     width: window.innerWidth,
     height: window.innerHeight,
   });
+
+  const SubscribeUser = async (email: string): Promise<boolean> => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/v0/launch/register",
+        {
+          email: email,
+        }
+      );
+      if (response.status === 201) {
+        swal("Subscribed", "Subscribed to SKIN AI", "success");
+        return true;
+      }
+      swal("Error While Subscribing", "Error While Subscribing", "error");
+      return false;
+    } catch (error) {
+      swal("Error While Subscribing", "Error While Subscribing", "error");
+      return false;
+    }
+  };
 
   function isEmailValid(email: string): boolean {
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -30,14 +51,19 @@ export default function App() {
     return () => window.removeEventListener("resize", screenSetup);
   }, [screen]);
 
-  const handleEmail = () => {
+  const handleEmail = async () => {
     if (isEmailValid(email)) {
-      setFlag(true);
       setEmail("");
-      swal("Thanks for Joining", "You have registered", "success");
+      const response = await SubscribeUser(email);
+
+      if (response) {
+        setFlag(true);
+        return swal("Thanks for Joining", "You have registered", "success");
+      }
+      return swal("unable to register", "Error While Registering", "warning");
     } else {
       setEmail("");
-      swal("Email Error", "Provide Correct Email", "warning");
+      swal("Email Error", "Provide Correct Email", "error");
     }
   };
   return (
