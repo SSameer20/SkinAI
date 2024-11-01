@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use("/api/v1/user", UserRouter);
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "templates", "serverTemplate.html")); // Make sure this path is correct
+  res.sendFile(path.join(__dirname, "templates", "serverTemplate.html"));
 });
 
 // Start the server
