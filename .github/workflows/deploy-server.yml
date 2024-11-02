@@ -3,7 +3,7 @@ name: Deploy Server
 on:
   push:
     paths:
-      - 'server/**'  # Trigger only if files in the `server` directory change
+      - "server/**"
 
 jobs:
   deploy:
@@ -15,7 +15,7 @@ jobs:
 
       - name: Deploy to Vercel
         env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}  # Use your Vercel token here
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }} # Use your Vercel token here
         run: |
           npm install -g vercel
           cd server  # Navigate to server directory
