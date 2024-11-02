@@ -20,11 +20,28 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "templates", "serverTemplate.html"));
 });
 
-// Start the server
+// Catch-all route for undefined routes
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: "Something went wrong!" });
+});
+
+// Start the server after connecting to the database
 const PORT = process.env.PORT || 8080;
 const mongoURI = process.env.MONGO_URI;
 
-app.listen(PORT, () => {
-  ConnectDB(mongoURI);
-  console.log(`Server running at http://localhost:${PORT}/`);
-});
+ConnectDB(mongoURI)
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running at http://localhost:${PORT}/`);
+    });
+  })
+  .catch((error) => {
+    console.error("Database connection failed:", error);
+    process.exit(1); // Exit the process with an error
+  });
