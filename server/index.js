@@ -13,8 +13,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 /** User Routes */
-app.use("/api/v1/launch", SubscriberRouter);
 app.use("/api/v1/user", UserRouter);
+app.use("/api/v1/launch", SubscriberRouter);
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "templates", "serverTemplate.html"));
