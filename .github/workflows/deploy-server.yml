@@ -1,0 +1,22 @@
+name: Deploy Server
+
+on:
+  push:
+    paths:
+      - "server/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }} # Use your Vercel token here
+        run: |
+          npm install -g vercel
+          cd server  # Navigate to server directory
+          vercel --prod --token $VERCEL_TOKEN

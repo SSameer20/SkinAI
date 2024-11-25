@@ -8,9 +8,6 @@ import HeroVideoDialog from "../ui/hero-video-dialog";
 import { Routes } from "../utilities/Routes";
 import { ReverseMarquee, StraightMarquee } from "../utilities/ReviewsMarquee";
 import { cn } from "@/lib/utils";
-// import Marquee from "../ui/marquee";
-
-// import Meteors from "../ui/meteors";
 
 interface ActionLabel {
   color?: string;
@@ -69,7 +66,7 @@ export default function Home() {
       w: window.innerWidth,
       h: window.innerHeight,
     });
-    // console.log(screen);
+    console.log(screen);
   };
 
   window.addEventListener("resize", handleScreen);
