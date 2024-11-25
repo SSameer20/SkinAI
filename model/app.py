@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 import datetime
-from files import CNN
+from Model.predect_disease import predict_disease
 
 app = Flask(__name__)
 
@@ -11,7 +11,11 @@ def index():
 
 @app.get("/test")
 def get_model_name():
-   return CNN.model("Sameer")
+    image_path = 'model//Model//SampleImage.jpg'
+    result = predict_disease(image_path)
+    return result
+
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
