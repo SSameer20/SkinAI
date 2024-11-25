@@ -66,7 +66,6 @@ export default function Home() {
       w: window.innerWidth,
       h: window.innerHeight,
     });
-    console.log(screen);
   };
 
   window.addEventListener("resize", handleScreen);
