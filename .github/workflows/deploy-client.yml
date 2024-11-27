@@ -3,7 +3,7 @@ name: Deploy Client Production
 on:
   push:
     paths:
-      - "client/**"
+      - "client/**"  # Trigger when any file in the 'client' folder is changed
 
 jobs:
   deploy:
@@ -13,10 +13,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Ensure you're using the appropriate Node.js version
+
+      - name: Install Vercel CLI globally
+        run: npm install -g vercel
+
       - name: Deploy to Vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          npm install -g vercel
-          cd client 
+          cd client  # Navigate to the client directory
           vercel --prod --token $VERCEL_TOKEN
