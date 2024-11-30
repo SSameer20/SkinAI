@@ -1,4 +1,3 @@
-// import GridPattern from "../ui/animated-grid-pattern";
 import { motion } from "framer-motion";
 import WordRotate from "../ui/word-rotate";
 import { Button } from "@nextui-org/react";

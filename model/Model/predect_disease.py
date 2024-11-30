@@ -6,7 +6,7 @@ from sklearn.calibration import LabelEncoder
 
 def predict_disease(image_path):
 
-    model_path = 'model//Model//skinAI.pkl'
+    model_path = '/model/Model/skinAI.pkl'
     
     try:
         with open(model_path, 'rb') as file:

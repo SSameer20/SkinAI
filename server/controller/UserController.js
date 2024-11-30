@@ -19,7 +19,7 @@ const UserLogin = async (req, res) => {
       userEmail: user.email,
     };
 
-    const secret = process.env.JWT_SECRET_KEY;
+    const secret = process.env.JWT_SECRET;
     const token = jwt.sign(payload, secret, {
       expiresIn: "1d",
     });
@@ -47,7 +47,7 @@ const UserLogin = async (req, res) => {
 
     SendEmail(email, "Login Successful", Template);
 
-    return res.json({ message: "Logged in successfully", token });
+    return res.status(200).json({ message: "Logged in successfully", token });
   } catch (error) {
     console.error("Login error:", error);
     return res

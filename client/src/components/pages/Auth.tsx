@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { AuthForm } from "../utilities/Auth.ds";
 import axios from "axios";
 import "../../styles/auth.css";
+import { Routes } from "../utilities/Routes";
+import swal from "sweetalert";
 
 export default function Auth() {
   const navigate = useNavigate();
@@ -43,10 +45,10 @@ export default function Auth() {
           password: data.password,
         }
       );
-
-      if (response.status === 201) {
-        alert("Success");
-        return navigate("/app");
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.token);
+        swal("Logged", "User logged successfully", "success");
+        return navigate(Routes.APP);
       }
     } catch (error) {
       console.error("Login failed:", error);
@@ -75,11 +77,13 @@ export default function Auth() {
           mobile: data.mobile,
           profileImage: data.profileURL || null,
         })
-        .then((res) => {
-          console.log(res.data);
+        .then(() => {
+          localStorage.removeItem("token");
+          swal("Registered", "User Registered", "success");
+          return navigate(Routes.AUTH);
         });
     } catch (error) {
-      console.log("error");
+      console.log(`${error}`);
     } finally {
       reset();
       setLoad(false);

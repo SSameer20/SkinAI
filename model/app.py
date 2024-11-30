@@ -11,7 +11,7 @@ def index():
 
 @app.get("/test")
 def get_model_name():
-    image_path = 'model//Model//SampleImage.jpg'
+    image_path = 'model/SampleImage.jpg'
     result = predict_disease(image_path)
     return result
 

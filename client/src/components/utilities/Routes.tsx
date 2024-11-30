@@ -2,7 +2,7 @@ export enum Routes {
   HOME = "/",
   AUTH = "/auth",
   APP = "/app",
-  DASHBOARD = "",
+  DASHBOARD = "dashboard",
   PROFILE = "profile",
-  ERROR = "/error",
+  ERROR = "*",
 }
