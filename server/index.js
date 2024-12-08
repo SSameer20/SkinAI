@@ -31,17 +31,16 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Something went wrong!" });
 });
 
-// Start the server after connecting to the database
-const PORT = process.env.PORT || 8080;
+// Connect to the database
 const mongoURI = process.env.MONGO_URI;
 
 ConnectDB(mongoURI)
   .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server running at http://localhost:${PORT}/`);
-    });
+    console.log("Database connected successfully!");
   })
   .catch((error) => {
     console.error("Database connection failed:", error);
-    process.exit(1); // Exit the process with an error
   });
+
+// Export the app for Vercel
+module.exports = app;
