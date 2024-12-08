@@ -27,18 +27,20 @@ export function UserCard() {
 export function MetricCard({
   title,
   count,
+  className,
 }: {
   title: string;
   count: number | null;
+  className?: string;
 }) {
   return (
-    <Card className="w-[200px]">
+    <Card className={className}>
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
         <p className="text-tiny uppercase font-bold">{title}</p>
         {count ? (
-          <h4 className="font-bold text-large">{count}</h4>
+          <h4 className="font-bold text-4xl">{count}</h4>
         ) : (
-          <h4 className="font-bold text-large">No Data</h4>
+          <h4 className="font-bold text-4xl">No Data</h4>
         )}
       </CardHeader>
       <CardBody className="overflow-visible py-2">
