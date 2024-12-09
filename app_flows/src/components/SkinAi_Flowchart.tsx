@@ -6,6 +6,10 @@ import ReactFlow, {
   useEdgesState,
   useNodesState,
   ReactFlowProvider,
+  Edge,
+  Node,
+  Connection,
+  ReactFlowInstance,
 } from "reactflow";
 import "reactflow/dist/style.css";
 
@@ -40,7 +44,7 @@ const edgeStyles = {
   default: { stroke: "#FF6347", strokeWidth: 2 },
 };
 
-const initialNodes = [
+const initialNodes: Node[] = [
   {
     id: "1",
     type: "input",
@@ -122,7 +126,7 @@ const initialNodes = [
   },
 ];
 
-const initialEdges = [
+const initialEdges: Edge[] = [
   { id: "e1-2", source: "1", target: "2", style: edgeStyles.default },
   { id: "e1-3", source: "1", target: "3", style: edgeStyles.default },
   { id: "e2-4", source: "2", target: "4", style: edgeStyles.default },
@@ -142,11 +146,12 @@ const initialEdges = [
 function Diagram() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const [reactFlowInstance, setReactFlowInstance] = useState(null);
+  const [reactFlowInstance, setReactFlowInstance] =
+    useState<ReactFlowInstance | null>(null);
 
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
-    [setEdges],
+    (params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)),
+    [setEdges]
   );
 
   return (
