@@ -19,9 +19,11 @@
     "html-to-text": "^9.0.5",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.1",
-    "nodemailer": "^6.9.15"
+    "nodemailer": "^6.9.15",
+    "typescript": "^5.7.2"
   },
   "devDependencies": {
+    "@vercel/node": "^3.2.28",
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.17",
     "@types/dotenv": "^8.2.3",
@@ -30,7 +32,6 @@
     "@types/mongoose": "^5.11.97",
     "@types/node": "^22.10.1",
     "@types/nodemailer": "^6.4.17",
-    "nodemon": "^3.1.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   }
