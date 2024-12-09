@@ -4,9 +4,9 @@
   "description": "Node server for handling backend",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc -b",
-    "start": "node ./dist/index.js",
-    "dev": "ts-node ./src/index.ts"
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc -w"
   },
   "author": "",
   "license": "ISC",
