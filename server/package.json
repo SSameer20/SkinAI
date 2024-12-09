@@ -4,10 +4,9 @@
   "description": "Node server for handling backend",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "production": "npm run build && npm start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tsc -b",
+    "start": "node ./dist/index.js",
+    "dev": "ts-node ./src/index.ts"
   },
   "author": "",
   "license": "ISC",
@@ -19,7 +18,19 @@
     "html-to-text": "^9.0.5",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.1",
-    "nodemailer": "^6.9.15",
-    "nodemon": "^3.1.7"
+    "nodemailer": "^6.9.15"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^8.2.3",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^22.10.1",
+    "@types/nodemailer": "^6.4.17",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
   }
 }
