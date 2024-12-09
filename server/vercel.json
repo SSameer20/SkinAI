@@ -9,15 +9,15 @@
   "routes": [
     {
       "src": "/api/v1/user/(.*)",
-      "dest": "/index.js"
+      "dest": "./dist/index.js"
     },
     {
       "src": "/api/v1/launch/(.*)",
-      "dest": "/index.js"
+      "dest": "./dist/index.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.js"
+      "dest": "./dist/index.js"
     }
   ]
 }
