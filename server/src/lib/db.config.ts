@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { log } from "./helper";
 
 /**
  * Connect to MongoDB using the provided URI.
@@ -8,9 +9,9 @@ import mongoose from "mongoose";
 const ConnectDB = async (mongoURI: string): Promise<void> => {
   try {
     await mongoose.connect(mongoURI);
-    console.log("MongoDB connected!");
+    log.info("MongoDB connected!");
   } catch (err) {
-    console.error("MongoDB connection error:", err);
+    log.error(`MongoDB connection error: ${err}`);
     throw new Error("Failed to connect to MongoDB");
   }
 };

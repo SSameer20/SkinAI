@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import fs from "fs/promises";
+import { log } from "../lib/helper";
 
 export const SendEmail = async (
   email: string,
@@ -41,9 +42,9 @@ export const SendEmail = async (
 
     // Send email
     await transporter.sendMail(mailOptions);
-    console.log(`Email sent to ${email} successfully.`);
+    log.info(`Email sent to ${email} successfully.`);
   } catch (error) {
-    console.error(`Failed to send email: ${error}`);
+    log.error(`Failed to send email: ${error}`);
     throw new Error("Email sending failed. Please check your configuration.");
   }
 };

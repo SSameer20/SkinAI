@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import ConnectDB from "./lib/db.config";
 import UserRouter from "./routes/UserRoutes";
 import SubscriberRouter from "./routes/SubscriberRoutes";
+import { log } from "./lib/helper";
 
 dotenv.config();
 
@@ -26,23 +27,23 @@ app.use((req: Request, res: Response): void => {
 });
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction): void => {
-  console.error(err.stack);
+  log.error(`${err.stack}`);
   res.status(500).json({ error: "Something went wrong!" });
 });
 
 const mongoURI: string | undefined = process.env.MONGO_URI;
 
 if (!mongoURI) {
-  console.error("MONGO_URI is not defined in environment variables");
+  log.error("MONGO_URI is not defined in environment variables");
   process.exit(1);
 }
 
 ConnectDB(mongoURI)
   .then((): void => {
-    console.log("Database connected successfully!");
+    log.info("Database connected successfully!");
   })
   .catch((error: Error): void => {
-    console.error("Database connection failed:", error);
+    log.error(`Database connection failed: ${error}`);
   });
 
 export default app;

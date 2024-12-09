@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "tsc -w"
+    "start": "node ./dist/index.js",
+    "dev": "tsc -b && node ./dist/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vercel/node": "^3.2.28",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
