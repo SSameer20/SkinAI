@@ -3,7 +3,7 @@ name: Deploy Client Production
 on:
   push:
     paths:
-      - "client/**"  # Trigger when any file in the 'client' folder is changed
+      - "client/**"
 
 jobs:
   deploy:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Ensure you're using the appropriate Node.js version
+          node-version: "16"
 
       - name: Install Vercel CLI globally
         run: npm install -g vercel
