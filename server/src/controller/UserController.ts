@@ -1,21 +1,15 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import User from "../models/UserModel";
-import { SendEmail } from "../mailer/Mailer";
-
-interface RegisterRequestBody {
-  name: string;
-  email: string;
-  password: string;
-  mobile: string;
-  profileImage?: string;
-}
-
-interface LoginRequestBody {
-  email: string;
-  password: string;
-}
+import { SendEmail, template } from "../mailer/Mailer";
+import {
+  JwtPayloadType,
+  LoginRequestBody,
+  RegisterRequestBody,
+} from "../lib/types";
+import { Types } from "mongoose";
+import { log } from "../lib/helper";
 
 export const UserLogin = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -36,9 +30,10 @@ export const UserLogin = async (req: Request, res: Response): Promise<void> => {
     }
 
     // Create JWT payload
-    const payload = {
-      userId: user._id,
-      userEmail: user.email,
+    const payload: JwtPayloadType = {
+      id: user._id as Types.ObjectId,
+      email: user.email as string,
+      role: "user",
     };
 
     // Sign token
@@ -46,27 +41,7 @@ export const UserLogin = async (req: Request, res: Response): Promise<void> => {
     const token = jwt.sign(payload, secret, { expiresIn: "1d" });
 
     // Email template
-    const Template = `
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Login | Skin AI</title>
-      </head>
-      <body>
-        <img src="cid:uniqueImageCID" alt="Embedded Image" />
-        <h1>Hello! ${user.name}</h1>
-        <p>Thank you for logging into your account! We wanted you to acknowledge your recent login attempt was successful.</p>
-        <div>
-          <h3>Login Details:</h3>
-          <p>Email Address: ${user.email}</p>
-          <p>Login Time: ${new Date()}</p>
-        </div>
-        <p>Thank you for reading!</p>
-      </body>
-    </html>`;
+    const Template = template.login(user.email, user.name);
 
     // Send login success email
     await SendEmail(email, "Login Successful", Template);
@@ -76,7 +51,6 @@ export const UserLogin = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ message: "Server error, please try again later." });
   }
 };
-
 export const UserRegister = async (
   req: Request,
   res: Response
@@ -113,28 +87,7 @@ export const UserRegister = async (
     await newUser.save();
 
     // Email template
-    const Template = `
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Register | Skin AI</title>
-      </head>
-      <body>
-        <img src="cid:uniqueImageCID" alt="Embedded Image" />
-        <h1>Welcome! ${name}</h1>
-        <p>Thank you for Registering! We welcome you to our family.</p>
-        <div>
-          <h3>User Details:</h3>
-          <p>Email Address: ${email}</p>
-          <p>Registration Time: ${new Date()}</p>
-          <p>IP Address: ${req.ip}</p>
-        </div>
-      </body>
-    </html>`;
-
+    const Template = template.register(name, email);
     // Send registration success email
     await SendEmail(email, "Registration Successful", Template);
 
@@ -144,6 +97,17 @@ export const UserRegister = async (
     });
   } catch (error) {
     console.error("Registration error:", error);
+    res.status(500).json({ message: "Server error, please try again later." });
+  }
+};
+
+export const UserDetails = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+  } catch (error) {
+    log.error(`Registration error: ${error}`);
     res.status(500).json({ message: "Server error, please try again later." });
   }
 };

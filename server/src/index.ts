@@ -40,7 +40,10 @@ if (!mongoURI) {
 
 ConnectDB(mongoURI)
   .then((): void => {
-    log.info("Database connected successfully!");
+    const PORT = process.env.PORT || 8080;
+    app.listen(PORT, () => {
+      log.info(`Server is Running on http://localhost:${PORT}`);
+    });
   })
   .catch((error: Error): void => {
     log.error(`Database connection failed: ${error}`);
