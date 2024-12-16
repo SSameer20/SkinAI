@@ -4,7 +4,7 @@
   "description": "Node server for handling backend",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -b",
     "start": "tsc -b && node ./dist/index.js",
     "dev": "tsc -b && node ./dist/index.js"
   },
