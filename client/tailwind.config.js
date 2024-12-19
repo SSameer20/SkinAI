@@ -9,6 +9,11 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        sm: "360px", // Normal modern smartphones
+        md: "640px", // Default small tablets
+        lg: "1024px",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
