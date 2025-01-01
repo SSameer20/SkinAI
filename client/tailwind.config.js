@@ -10,8 +10,8 @@ export default {
   theme: {
     extend: {
       screens: {
-        sm: "360px", // Normal modern smartphones
-        md: "640px", // Default small tablets
+        sm: "360px",
+        md: "640px",
         lg: "1024px",
       },
       borderRadius: {

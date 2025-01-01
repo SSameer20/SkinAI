@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ChallengeDataType } from "@/utils/types";
 
 export const ListBox = ({
@@ -17,22 +18,23 @@ export const ListBox = ({
     <div
       className={
         className +
-        " h-[100%] w-[80%] rounded-xl flex justify-center items-center sm:min-h-full" +
+        " h-auto w-[90%] rounded-xl flex justify-center items-center sm:min-h-full" +
         variants[variant]
       }
     >
-      <div className="h-4/5 w-[4/5] flex justify-around items-center flex-wrap">
+      <div className="h-[100%] w-[4/5] flex justify-around items-center flex-wrap gap-10 p-10">
         {data &&
           data.map((item, index) => {
             return (
               <div
                 key={index}
-                className="lg:w-2/5  sm:w-3/4 lg:h-1/5 sm:h-1/6 flex flex-col justify-start lg:items-start lg:text-left sm:items-center sm:text-center md:items-center md:text-center"
+                className="lg:w-2/5  sm:w-3/4 flex flex-col justify-start lg:items-center lg:text-center sm:items-center sm:text-center md:items-center md:text-center gap-2"
               >
+                <img src={item.image} className="w-[100px] h-1/3" />
                 <span className="font-semibold lg:text-[20px] md:text-[20px] sm:text-[16px]">
                   {item.title}
                 </span>
-                <span className="lg:text-[18px] md:text-[16px] sm:text-[12px]">
+                <span className="lg:w-3/5  sm:w-3/4 lg:text-[18px] md:text-[16px] sm:text-[12px] text-[#2c2e2d]">
                   {item.description}
                 </span>
               </div>

@@ -4,6 +4,7 @@ import remote from "../media/online_treatment.jpg";
 import { useEffect, useState } from "react";
 import { ListBox } from "@/components/TextComponents";
 import { SeedChallenges } from "@/utils/SeedData";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [size, setSize] = useState<{ height: number; width: number }>({
@@ -27,13 +28,13 @@ export default function Home() {
   }, [size]);
 
   return (
-    <div className=" flex flex-col w-full min-h-screen overflow-x-hidden scrollbar-hide scrollbar-thumb-gray-500">
+    <div className="relative flex flex-col w-full min-h-screen overflow-x-hidden scrollbar-hide scrollbar-thumb-gray-500 overscroll-none">
       {/* Navigation Bar */}
-      <div className=" h-[10vh]">
-        <Navigation className="sticky" />
+      <div className="h-[10vh]">
+        <Navigation />
       </div>
 
-      <div className="lg:px-[100px] md:px-[30px] sm:px-[16px] lg:gap-10">
+      <div className="lg:px-[100px] md:px-[30px] sm:px-[16px] gap-10 scrollbar-hide">
         {/* Main Content */}
         <div className="relative flex flex-col lg:flex-row md:flex-col sm:flex-col w-full justify-center items-center h-auto lg:h-[90vh] overflow-y-auto sm:gap-10">
           {/* Main Image and Content */}
@@ -73,11 +74,12 @@ export default function Home() {
         </div>
 
         {/* Challenges */}
-        <div className="w-[100%] h-[100vh] flex flex-col justify-start items-center lg:py-[100px] gap-10">
-          <span className="lg:text-3xl font-bold">The Challenges We Solve</span>
+        <div className="w-[100%] min-h-[100vh] flex flex-col justify-start items-center lg:py-[100px] gap-10">
+          <span className="lg:text-3xl font-bold">What We Solve ?</span>
           <ListBox variant="default" data={SeedChallenges} />
         </div>
       </div>
+      <Footer className="bottom-0 h-1/5" />
     </div>
   );
 }

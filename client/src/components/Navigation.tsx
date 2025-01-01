@@ -129,8 +129,8 @@ export default function Navigation({
       {menu && (
         <ul
           className="absolute flex flex-col gap-10 justify-center w-[90vw]
-        bg-[#f5e9fe] bottom-0 z-[100]
-         h-[80vh] items-center text-[#14263D] bottom-0 border-t-2 transition-transform
+        bg-[#f5e9fe] top-[100px] z-50
+         h-[80vh] items-center text-[#14263D] border-t-2 transition-transform
           duration-900 ease-in-out"
         >
           <li>
