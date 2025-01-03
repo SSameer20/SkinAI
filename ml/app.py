@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 import datetime
-from Model.predect_disease import predict_disease
+from model.predect_disease import predict_disease
 
 app = Flask(__name__)
 
