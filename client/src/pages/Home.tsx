@@ -34,7 +34,7 @@ export default function Home() {
         <Navigation />
       </div>
 
-      <div className="lg:px-[100px] md:px-[30px] sm:px-[16px] gap-10 scrollbar-hide">
+      <div className="lg:px-[100px] md:px-[30px] sm:px-[16px] gap-10 scrollbar-hide animate-view">
         {/* Main Content */}
         <div className="relative flex flex-col lg:flex-row md:flex-col sm:flex-col w-full justify-center items-center h-auto lg:h-[90vh] overflow-y-auto sm:gap-10">
           {/* Main Image and Content */}
@@ -74,9 +74,13 @@ export default function Home() {
         </div>
 
         {/* Challenges */}
-        <div className="w-[100%] min-h-[100vh] flex flex-col justify-start items-center lg:py-[100px] gap-10">
+        <div className="w-[100%] min-h-[100vh] flex flex-col justify-start items-center lg:py-[100px] gap-10 ">
           <span className="lg:text-3xl font-bold">What We Solve ?</span>
-          <ListBox variant="default" data={SeedChallenges} />
+          <ListBox
+            className="animate-view"
+            variant="default"
+            data={SeedChallenges}
+          />
         </div>
       </div>
       <Footer className="bottom-0 h-1/5" />

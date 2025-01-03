@@ -4,29 +4,47 @@
 
 @layer utilities {
   .scrollbar::-webkit-scrollbar {
-    width: 12px; /* Adjust the width as needed */
+    width: 12px;
   }
 
   .scrollbar::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Scrollbar track color */
+    background: #f1f1f1;
   }
 
   .scrollbar::-webkit-scrollbar-thumb {
-    background: #888; /* Scrollbar thumb color */
-    border-radius: 6px; /* Optional: Round the thumb */
+    background: #888;
+    border-radius: 6px;
   }
 
   .scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Scrollbar thumb hover color */
+    background: #555;
   }
 
   .scrollbar-hide {
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   .scrollbar-hide::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Edge */
+    display: none;
+  }
+
+  /* onScroll Animations  */
+  .animate-view {
+    animation: appear linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+
+  @keyframes appear {
+    from {
+      opacity: 0;
+      scale: 0.6;
+    }
+    to {
+      opacity: 1;
+      scale: 1;
+    }
   }
 }
 
