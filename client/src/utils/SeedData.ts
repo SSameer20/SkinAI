@@ -1,8 +1,11 @@
-import { ChallengeDataType, TeamMember } from "./types";
+import { ChallengeDataType, TeamMember, Value } from "./types";
 import awareness from "../media/awareness.png";
 import stigma from "../media/stigma.png";
 import accessibility from "../media/accessibility.png";
 import treatment from "../media/conversation.png";
+import { TbWashDryclean } from "react-icons/tb";
+import { MdOutlineSecurity } from "react-icons/md";
+import { MdPrivacyTip } from "react-icons/md";
 
 export const SeedChallenges: ChallengeDataType[] = [
   {
@@ -61,5 +64,20 @@ export const teamMembers: TeamMember[] = [
     role: "Developer",
     image:
       "https://media.licdn.com/dms/image/v2/D5635AQGilOZP2S1JFA/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1736118862686?e=1736791200&v=beta&t=kcuxfMsvaLXP1u68rjND3qD35AkcY_5OeCTgqDBaFaI",
+  },
+];
+
+export const values: Value[] = [
+  {
+    name: "Transparency",
+    icon: TbWashDryclean,
+  },
+  {
+    name: "Security",
+    icon: MdOutlineSecurity,
+  },
+  {
+    name: "Privacy",
+    icon: MdPrivacyTip,
   },
 ];
