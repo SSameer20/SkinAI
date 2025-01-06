@@ -25,25 +25,41 @@ export default function Footer({ className }: { className?: string }) {
         <ul className="text-white text-sm">
           <span className="font-semibold text-white text-lg">Developer</span>
           <li>
-            <a href="">Contribute</a>
+            <a
+              href="https://github.com/SSameer20/SkinAI/issues"
+              target="_blank"
+            >
+              Contribute
+            </a>
           </li>
           <li>
             <a href="#">API</a>
           </li>
           <li>
-            <a href="#">Report Issue</a>
+            <a
+              href="https://github.com/SSameer20/SkinAI/issues/new/choose"
+              target="_blank"
+            >
+              Report Issue
+            </a>
           </li>
         </ul>
         <ul className="text-white text-sm">
           <span className="font-semibold text-white text-lg">Social</span>
           <li>
-            <a href="">Twitter</a>
+            <a href="https://github.com/SSameer20/SkinAI" target="_blank">
+              Twitter
+            </a>
           </li>
           <li>
-            <a href="">Linkedin</a>
+            <a href="https://github.com/SSameer20/SkinAI" target="_blank">
+              Linkedin
+            </a>
           </li>
           <li>
-            <a href="#">Github</a>
+            <a href="https://github.com/SSameer20/SkinAI" target="_blank">
+              Github
+            </a>
           </li>
         </ul>
       </div>
