@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import Home from "./pages/Home";
 import App from "./pages/App";
+import About from "./pages/About";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -14,6 +15,7 @@ createRoot(document.getElementById("root")!).render(
           <Routes>
             <Route path="" element={<Home />} />
             <Route path="/app" element={<App />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </main>
       </NextUIProvider>
