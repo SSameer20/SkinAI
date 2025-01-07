@@ -6,18 +6,21 @@ import "./index.css";
 import Home from "./pages/Home";
 import App from "./pages/App";
 import About from "./pages/About";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <NextUIProvider>
-        <main>
-          <Routes>
-            <Route path="" element={<Home />} />
-            <Route path="/app" element={<App />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
-        </main>
+        <ParallaxProvider>
+          <main>
+            <Routes>
+              <Route path="" element={<Home />} />
+              <Route path="/app" element={<App />} />
+              <Route path="/about" element={<About />} />
+            </Routes>
+          </main>
+        </ParallaxProvider>
       </NextUIProvider>
     </BrowserRouter>
   </StrictMode>
