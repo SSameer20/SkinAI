@@ -11,11 +11,10 @@ export const SubscriberRegister = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { email }: SubscriberRequestBody = req.body;
+    const { email } = req.body;
 
-    // Check if the user is already registered
-    const searchUser = await Subscriber.find({ email });
-    if (searchUser.length > 0) {
+    const searchUser = await Subscriber.findOne({ email });
+    if (searchUser) {
       res.status(404).send({ message: "User already registered" });
       return;
     }
