@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import fs from "fs/promises";
 import { log } from "../lib/helper";
 import { register } from "module";
+import path from "path";
 
 export const SendEmail = async (
   email: string,
@@ -33,10 +34,10 @@ export const SendEmail = async (
       html: template,
       attachments: [
         {
-          filename: "./media/skin_ai_logo.png",
+          filename: path.resolve(__dirname, "../mailer/media/skin_ai_logo.png"),
           content: imageAttachment,
           encoding: "base64",
-          cid: "uniqueImageCID",
+          cid: "logo",
         },
       ],
     };
@@ -61,7 +62,7 @@ export const template = {
         <title>Login | Skin AI</title>
       </head>
       <body>
-        <img src="cid:uniqueImageCID" alt="Embedded Image" />
+        <img src="cid:logo" alt="Embedded Image" />
         <h1>Hello! ${name}</h1>
         <p>Thank you for logging into your account! We wanted you to acknowledge your recent login attempt was successful.</p>
         <div>
