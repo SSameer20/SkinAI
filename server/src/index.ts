@@ -46,7 +46,7 @@ ConnectDB(mongoURI)
   .then((): void => {
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => {
-      log.info(`Server is Running on http://localhost:${PORT}`);
+      log.info(`Server is Running on ${PORT}`);
     });
   })
   .catch((error: Error): void => {

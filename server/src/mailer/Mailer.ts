@@ -10,9 +10,13 @@ export const SendEmail = async (
 ): Promise<void> => {
   try {
     // Read the image file as a buffer
-    const imageAttachment = await fs.readFile(
-      path.resolve(__dirname, "mailer/media/skin_ai_logo.png")
+    const imagePath = path.resolve(
+      process.env.NODE_ENV === "production"
+        ? path.join(__dirname, "static/media/skin_ai_logo.png")
+        : path.join(__dirname, "../../static/media/skin_ai_logo.png")
     );
+
+    const imageAttachment = await fs.readFile(imagePath);
 
     // Create a Nodemailer transporter
     const transporter = nodemailer.createTransport({
