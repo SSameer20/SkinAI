@@ -31,7 +31,11 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction): void => {
   res.status(500).json({ error: "Something went wrong!" });
 });
 
-const mongoURI: string | undefined = process.env.MONGO_URI;
+const mongoURI = process.env.MONGO_URI;
+
+if (!mongoURI) {
+  throw new Error("MONGO_URI environment variable is not defined");
+}
 
 if (!mongoURI) {
   log.error("MONGO_URI is not defined in environment variables");
