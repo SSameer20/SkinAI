@@ -1,10 +1,12 @@
 {
-  "name": "server",
-  "version": "0.0.1",
+  "name": "skinai-server",
+  "version": "1.0.0",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "tsc -b",
     "start": "node dist/index.js",
-    "dev": "ts-node src/index.ts"
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "postinstall": "tsc"
   },
   "dependencies": {
     "express": "^4.18.2",
@@ -25,5 +27,8 @@
     "@types/nodemailer": "^6.4.14",
     "typescript": "^5.3.3",
     "ts-node": "^10.9.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
