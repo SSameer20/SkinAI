@@ -19,7 +19,7 @@ app.use("/api/v1/user", UserRouter);
 app.use("/api/v1/launch", SubscriberRouter);
 
 app.get("/", (req: Request, res: Response): void => {
-  res.sendFile(path.join(__dirname, "templates", "serverTemplate.html"));
+  res.sendFile(path.join(__dirname, "../templates/serverTemplate.html"));
 });
 
 app.use((req: Request, res: Response): void => {
