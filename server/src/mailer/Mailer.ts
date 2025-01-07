@@ -12,9 +12,17 @@ export const SendEmail = async (
     // Read the image file as a buffer
     const imagePath = path.resolve(
       process.env.NODE_ENV === "production"
-        ? path.join(__dirname, "static", "media/skin_ai_logo.png")
-        : path.join(__dirname, "../../static/media/skin_ai_logo.png")
+        ? path.join(__dirname, "static", "media", "skin_ai_logo.png")
+        : path.join(
+            __dirname,
+            "..",
+            "..",
+            "static",
+            "media",
+            "skin_ai_logo.png"
+          )
     );
+    log.info(imagePath); /* Remove this after Testing */
 
     const imageAttachment = await fs.readFile(imagePath);
 
