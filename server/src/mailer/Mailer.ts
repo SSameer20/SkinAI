@@ -21,8 +21,8 @@ export const SendEmail = async (
       port: 465,
       secure: true,
       auth: {
-        user: process.env.EMAIL_USER, // Email user from environment variables
-        pass: process.env.EMAIL_PASS, // Email password or app-specific password
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
@@ -86,7 +86,7 @@ export const template = {
         <title>Register | Skin AI</title>
       </head>
       <body>
-        <img src="cid:uniqueImageCID" alt="Embedded Image" />
+        <img src="cid:logo" alt="Embedded Image" />
         <h1>Welcome! ${name}</h1>
         <p>Thank you for Registering! We welcome you to our family.</p>
         <div>
