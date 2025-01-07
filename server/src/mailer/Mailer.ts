@@ -1,7 +1,6 @@
 import nodemailer from "nodemailer";
 import fs from "fs/promises";
 import { log } from "../lib/helper";
-import { register } from "module";
 import path from "path";
 
 export const SendEmail = async (
@@ -12,7 +11,7 @@ export const SendEmail = async (
   try {
     // Read the image file as a buffer
     const imageAttachment = await fs.readFile(
-      "./mailer/media/skin_ai_logo.png"
+      path.resolve(__dirname, "mailer/media/skin_ai_logo.png")
     );
 
     // Create a Nodemailer transporter
@@ -34,7 +33,7 @@ export const SendEmail = async (
       html: template,
       attachments: [
         {
-          filename: path.resolve(__dirname, "../mailer/media/skin_ai_logo.png"),
+          filename: "skin_ai_logo.png",
           content: imageAttachment,
           encoding: "base64",
           cid: "logo",
