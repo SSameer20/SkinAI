@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 import datetime
 from model.predect_disease import predict_disease
 
@@ -12,8 +12,16 @@ def index():
 @app.get("/test")
 def get_model_name():
     image_path = 'model/SampleImage.jpg'
-    result = predict_disease(image_path)
-    return result
+    try:
+            result = predict_disease(image_path)
+            if result:
+                return jsonify(result)
+            else:
+                return jsonify({"error": "Prediction failed, no result returned."}), 500
+    except Exception as e:
+            # Handle any other errors
+            print(f"Error during prediction: {e}")
+            return jsonify({"error": str(e)}), 500
 
     
 
