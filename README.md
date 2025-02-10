@@ -1,23 +1,53 @@
-![Banner](./assets/banner.gif)
-# SkinAI
+<div align="center">
+ 
+  <h1>
+    <b>
+      SkinAI
+    </b>
+  </h1>
+  <b>
+    Open Source Skin Analysis Platform
+  </b>
+  <p>
 
-**SkinAI** is an AI-powered web application designed to analyze skin conditions and provide immediate insights and precautions based on the analysis. This application serves as a preliminary tool to help users understand potential skin issues and encourages them to seek professional medical advice.
-## Tech Stack
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen?logo=github)](CODE_OF_CONDUCT.md) [![Website](https://img.shields.io/website?url=https://www.skinai.live&logo=skinai)](https://www.skinai.live)
 
-### Frontend
-- **React**, **TypeScript**
-### Backend
-- **Python**, **NodeJs**
-### Database
-- **MongoDB**
+  </p>
+  <p>
+    <sub>
+      Built with ❤︎ by
+      <a href="https://github.com/SSameer20/skinAI/graphs/contributors">
+        contributors
+      </a>
+    </sub>
+  </p>
+  <br />
+</div>
 
-### Tools & Libraries
-- **VSCode**, **Git**, **NodeMailer**
-## Contributing
+_We highly recommend you take a look at the [**SkinAI Contribution Guidelines**](https://www.skinai.live) to learn more about the app._
 
-We welcome contributions from the community! Please follow these steps to [contribute](./CONTRIBUTING.md)
+#### **Support**
+[![Chat on Telegram](https://img.shields.io/badge/chat-Telegram-2CA5E0?logo=telegram)](https://chat.whatsapp.com/HYBSLuotplM5qcPaZ1ojIx) [![Chat on Whatsup](https://img.shields.io/badge/chat-Whatsup-DDEB9D?logo=whatsup)](https://chat.whatsapp.com/HYBSLuotplM5qcPaZ1ojIx) [![Discuss on GitHub](https://img.shields.io/badge/discussions-GitHub-333333?logo=github)](https://github.com/SSameer20/SkinAI/discussions)
 
 
-## Contact
+## **Contributing**
 
-For any inquiries, please contact us at [sameer.kattubadi@gmail.com](sameer.kattubadi@gmail.com).
+Please contribute using [GitHub Flow](https://guides.github.com/introduction/flow). Create a branch, add commits, and [open a pull request](https://github.com/hoppscotch/hoppscotch/compare).
+
+Please read [`CONTRIBUTING`](CONTRIBUTING.md) for details on our [`CODE OF CONDUCT`](CODE_OF_CONDUCT.md), and the process for submitting pull requests to us.
+
+## **Continuous Integration**
+
+We use [GitHub Actions](https://github.com/features/actions) for continuous integration. Check out our [build workflows](https://github.com/hoppscotch/hoppscotch/actions).
+
+
+
+## **Authors**
+
+This project owes its existence to the collective efforts of all those who contribute — [contribute now](CONTRIBUTING.md).
+
+<div align="center">
+  <a href="https://github.com/SSameer/SkinAI/graphs/contributors">
+   <h5>open contributors list</h5>
+  </a>
+</div>
