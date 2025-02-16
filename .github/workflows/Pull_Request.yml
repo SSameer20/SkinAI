@@ -1,4 +1,4 @@
-name: Test Project
+name: Test All Sub-Projects
 
 on:
   pull_request:
@@ -6,20 +6,61 @@ on:
       - master
       - main
       - prod
+
 jobs:
-  test:
+  backend-tests:
+    name: Run Backend Tests
     runs-on: ubuntu-latest
     container:
-      image: node:20 
+      image: node:20  # Assuming the backend uses Node.js
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install Dependencies
+      - name: Install Backend Dependencies
+        working-directory: server
         run: npm install
 
-      - name: Build the Project
+      - name: Lint Backend
+        working-directory: server
+        run: npm run lint -- --fix
+
+  frontend-tests:
+    name: Run Frontend Tests
+    runs-on: ubuntu-latest
+    container:
+      image: node:20  # Assuming frontend is also Node.js based
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Frontend Dependencies
+        working-directory: client
+        run: npm install
+
+      - name: Lint Frontend
+        working-directory: frontend
+        run: npm run lint -- --fix
+
+      - name: Build Frontend
+        working-directory: frontend
         run: npm run build
-      
-      
+
+  flask-tests:
+    name: Run Flask Server Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install Flask Dependencies
+        working-directory: ml
+        run: pip install -r requirements.txt
