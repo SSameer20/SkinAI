@@ -3,10 +3,11 @@ name: Test Project
 on:
   pull_request:
     paths:
-      - 'client/**' 
+      - 'SkinAI/client/**'
+      - 'SkinAI/server/**'
 
 jobs:
-  test:
+  test-client:
     runs-on: ubuntu-latest
     container:
       image: node:20 
@@ -17,12 +18,29 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-        working-directory: client
+        working-directory: SkinAI/client
         
       - name: Lint Test
         run: npm run lint
-        working-directory: client
+        working-directory: SkinAI/client
 
       - name: Build the Project
         run: npm run build
-        working-directory: client
+        working-directory: SkinAI/client
+        
+    test-server:
+    runs-on: ubuntu-latest
+    container:
+      image: node:20 
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: SkinAI/server
+
+      - name: Build the Project
+        run: npm run build
+        working-directory: SkinAI/server
