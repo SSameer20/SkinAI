@@ -30,18 +30,13 @@ export default function Home() {
 
   return (
     <div className="relative flex flex-col w-full min-h-screen overflow-x-hidden scrollbar-hide scrollbar-thumb-gray-500 overscroll-none">
-      {/* Navigation Bar */}
       <div className="h-[10vh]">
         <Navigation />
       </div>
 
       <div className="lg:px-[100px] md:px-[30px] sm:px-[16px] gap-10 scrollbar-hide animate-view">
-        {/* Main Content */}
-
         <div className="relative flex flex-col lg:flex-row md:flex-col sm:flex-col w-full justify-center items-center h-auto lg:h-[90vh] overflow-hidden sm:gap-10">
-          {/* Main Image and Content */}
           <div className="flex flex-col lg:flex-row-reverse md:flex-col sm:flex-col lg:h-[80vh] items-center justify-around w-full lg:w-2/3 gap-6">
-            {/* <Parallax translateY={[100, -100]}> */}
             <Parallax translateY={[-50, 50]} speed={-50}>
               <img
                 src={dermitologist}
@@ -50,13 +45,9 @@ export default function Home() {
               />
             </Parallax>
 
-            {/* </Parallax> */}
-
-            {/* Text Content */}
-
             <div className="flex flex-col gap-6 items-start text-left lg:text-left w-1/2 sm:text-left">
               <p className="text-2xl lg:text-4xl font-semibold py-5 px-4 rounded-[10px] lg:leading-10">
-                Analyze your skin in seconds with{" "}
+                Analyze your skin in seconds with
                 <span className="text-[#357FC2]">SKIN.AI</span>
               </p>
               <button className="px-6 py-3 border-2 rounded-[10px] bg-[#357FC2] text-white font-bold hover:bg-[#94BEE5] hover:text-[#357FC2] transition">
@@ -65,7 +56,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Sub Image and Content */}
           <Parallax
             translateY={[50, -50]}
             speed={-50}
@@ -86,7 +76,6 @@ export default function Home() {
           </Parallax>
         </div>
 
-        {/* Challenges */}
         <Parallax scale={[0.8, 1, "easeIn"]}>
           <div className="w-[100%] min-h-[100vh] flex flex-col justify-start items-center lg:py-[100px] gap-10 ">
             <span className="lg:text-3xl font-bold">What We Solve ?</span>
