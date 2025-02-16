@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+ 
 import { ChallengeDataType } from "@/utils/types";
 
 export const ListBox = ({

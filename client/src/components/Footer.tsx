@@ -27,7 +27,7 @@ export default function Footer({ className }: { className?: string }) {
           <li>
             <a
               href="https://github.com/SSameer20/SkinAI/issues"
-              target="_blank"
+              target="_blank" rel="noreferrer"
             >
               Contribute
             </a>
@@ -38,7 +38,7 @@ export default function Footer({ className }: { className?: string }) {
           <li>
             <a
               href="https://github.com/SSameer20/SkinAI/issues/new/choose"
-              target="_blank"
+              target="_blank" rel="noreferrer"
             >
               Report Issue
             </a>
@@ -47,17 +47,17 @@ export default function Footer({ className }: { className?: string }) {
         <ul className="text-white text-sm">
           <span className="font-semibold text-white text-lg">Social</span>
           <li>
-            <a href="https://github.com/SSameer20/SkinAI" target="_blank">
+            <a href="https://github.com/SSameer20/SkinAI" target="_blank" rel="noreferrer">
               Twitter
             </a>
           </li>
           <li>
-            <a href="https://github.com/SSameer20/SkinAI" target="_blank">
+            <a href="https://github.com/SSameer20/SkinAI" target="_blank" rel="noreferrer">
               Linkedin
             </a>
           </li>
           <li>
-            <a href="https://github.com/SSameer20/SkinAI" target="_blank">
+            <a href="https://github.com/SSameer20/SkinAI" target="_blank" rel="noreferrer">
               Github
             </a>
           </li>
