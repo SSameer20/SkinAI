@@ -1,0 +1,51 @@
+name: Lint Check
+
+on:
+  pull_request:
+    branches:
+      - main # Change this to your default branch
+
+jobs:
+  lint-frontend:
+    name: Lint Frontend (React + TypeScript)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+          
+      - name: Install Frontend Dependencies
+        working-directory: client
+        run: npm install
+
+      - name: Run ESLint
+        working-directory: client
+        run: npm run lint
+
+  lint-backend:
+    name: Lint Backend (TypeScript + Node.js) 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+          
+      - name: Install Backend Dependencies
+        working-directory: server
+        run: npm install
+
+      - name: Run ESLint
+        working-directory: server
+        run: npm run lint
