@@ -3,8 +3,7 @@ name: Lint Check
 on:
   pull_request:
     branches:
-      - main # Change this to your default branch
-
+      - main 
 jobs:
   lint-frontend:
     name: Lint Frontend (React + TypeScript)
