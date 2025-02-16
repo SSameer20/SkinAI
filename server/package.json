@@ -2,6 +2,7 @@
   "name": "skinai-server",
   "version": "1.0.0",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc",
@@ -9,24 +10,24 @@
     "postinstall": "tsc"
   },
   "dependencies": {
-    "express": "^4.18.2",
     "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.0",
-    "cors": "^2.8.5",
-    "body-parser": "^1.20.2",
-    "dotenv": "^16.3.1",
     "nodemailer": "^6.9.8"
   },
   "devDependencies": {
-    "@types/node": "^20.10.6",
-    "@types/express": "^4.17.21",
     "@types/bcrypt": "^5.0.2",
-    "@types/jsonwebtoken": "^9.0.5",
     "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/node": "^20.10.6",
     "@types/nodemailer": "^6.4.14",
-    "typescript": "^5.3.3",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   },
   "engines": {
     "node": ">=18.0.0"
