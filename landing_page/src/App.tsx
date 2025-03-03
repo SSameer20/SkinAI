@@ -1,225 +1,94 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import swal from "sweetalert";
 import axios from "axios";
-interface ScreenSize {
-  width: number;
-  height: number;
-}
 
 export default function App() {
   const [email, setEmail] = useState<string>("");
   const [flag, setFlag] = useState<boolean>(false);
-  const [screen, setScreen] = useState<ScreenSize>({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
-
-  const SubscribeUser = async (email: string): Promise<boolean> => {
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/api/v0/launch/register",
-        {
-          email: email,
-        }
-      );
-      if (response.status === 201) {
-        swal("Subscribed", "Subscribed to SKIN AI", "success");
-        return true;
-      }
-      swal("Error While Subscribing", "Error While Subscribing", "error");
-      return false;
-    } catch (error) {
-      swal("Error While Subscribing", "Error While Subscribing", "error");
-      return false;
-    }
-  };
-
-  function isEmailValid(email: string): boolean {
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const validEmail = (email: string): boolean => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
-  }
-
-  const screenSetup = (): void => {
-    setScreen({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
   };
-  useEffect(() => {
-    window.addEventListener("resize", screenSetup);
-
-    return () => window.removeEventListener("resize", screenSetup);
-  }, [screen]);
-
-  const handleEmail = async () => {
-    if (isEmailValid(email)) {
-      setEmail("");
-      const response = await SubscribeUser(email);
-
-      if (response) {
-        setFlag(true);
-        return swal("Thanks for Joining", "You have registered", "success");
+  const handleEmail = async (): Promise<void> => {
+    try {
+      setFlag(true);
+      if (!validEmail(email)) {
+        swal("Invalid", "use valid email", "warning");
+        return;
       }
-      return swal("unable to register", "Error While Registering", "warning");
-    } else {
+      const response = await axios.post(
+        "https://api-skinai.onrender.com/api/v1/launch/register",
+        { email }
+      );
+
+      if (response.status === 201) {
+        swal("Registered", "Thanks for Joining", "success");
+        return;
+      }
+
+      throw new Error(`${response.data.message}`);
+    } catch (error) {
+      swal("Error while registering", `${error}`, "error");
+    } finally {
+      setFlag(false);
       setEmail("");
-      swal("Email Error", "Provide Correct Email", "error");
     }
   };
+
   return (
-    <div className="relative w-[100vw] h-[100vh] overflow-hidden bg-black flex justify-center items-center">
+    <div className="relative w-screen h-screen overflow-hidden bg-black flex justify-center items-center">
       <span
-        className="absolute text-white font-bold opacity-[0.1] z-0"
-        style={
-          screen.width >= 1280
-            ? {
-                marginTop: "-50vh",
-                fontSize: "180px",
-                letterSpacing: "5vw",
-              }
-            : screen.width >= 680
-            ? { marginTop: "-55vh", fontSize: "150px", letterSpacing: "5vw" }
-            : {
-                marginTop: "-40vh",
-                fontSize: "80px",
-                letterSpacing: "3vw",
-              }
-        }
+        className={`absolute text-white font-bold opacity-10 z-0 
+        lg:-mt-[50vh] lg:text-[180px] lg:tracking-[5vw] 
+        md:-mt-[55vh] md:text-[150px] md:tracking-[5vw]
+        sm:-mt-[40vh] sm:text-[80px] sm:tracking-[3vw]`}
       >
         SKINAI
       </span>
 
       <div
-        className="absolute bg-black rounded-[50%] z-1"
-        style={
-          screen.width >= 1280
-            ? {
-                boxShadow:
-                  "0 -30px 50px -30px #0050FC,inset 0 10px 10px -5px #124FD1",
-                marginTop: "5vh",
-                width: "25vw",
-                aspectRatio: "1/1",
-              }
-            : screen.width >= 680
-            ? {
-                boxShadow:
-                  "0 -30px 50px -30px #0050FC,inset 0 10px 10px -5px #124FD1",
-                marginTop: "-25vh",
-                width: "30vw",
-                aspectRatio: "1/1",
-              }
-            : {
-                boxShadow:
-                  "0 -30px 50px -30px #0050FC,inset 0 10px 10px -5px #124FD1",
-                marginTop: "-15vh",
-                width: "50vw",
-                aspectRatio: "1/1",
-              }
-        }
-      />
+        className={`absolute bg-black rounded-full z-1 
+        lg:shadow-[0_-30px_50px_-30px_#0050FC,inset_0_10px_10px_-5px_#124FD1] lg:mt-[5vh] lg:w-[25vw] lg:aspect-square 
+        md:shadow-[0_-30px_50px_-30px_#0050FC,inset_0_10px_10px_-5px_#124FD1] md:-mt-[25vh] md:w-[30vw] md:aspect-square 
+        sm:shadow-[0_-30px_50px_-30px_#0050FC,inset_0_10px_10px_-5px_#124FD1] sm:-mt-[15vh] sm:w-[50vw] sm:aspect-square`}
+      ></div>
 
       <span
-        className="absolute text-white font-bold  z-2"
-        style={
-          screen.width >= 1280
-            ? {
-                marginTop: "10vh",
-                fontSize: "40px",
-                letterSpacing: "3vw",
-              }
-            : screen.width >= 680
-            ? { marginTop: "0vh", fontSize: "20px", letterSpacing: "3vw" }
-            : {
-                marginTop: "-10vh",
-                fontSize: "20px",
-                letterSpacing: "3vw",
-              }
-        }
+        className={`absolute text-white font-bold z-2 
+        lg:mt-[10vh] lg:text-[40px] lg:tracking-[3vw] 
+        md:mt-[0vh] md:text-[20px] md:tracking-[3vw] 
+        sm:-mt-[10vh] sm:text-[20px] sm:tracking-[3vw]`}
       >
         COMING SOON
       </span>
 
       {flag ? (
         <span
-          className="absolute text-white font-bold"
-          style={
-            screen.width >= 1280
-              ? {
-                  gap: "10px",
-                  marginTop: "50vh",
-                  fontSize: "50px",
-                  textAlign: "center",
-                }
-              : screen.width >= 680
-              ? {
-                  gap: "10px",
-                  marginTop: "40vh",
-                  fontSize: "50px",
-                  textAlign: "center",
-                }
-              : {
-                  gap: "10px",
-                  marginTop: "20vh",
-                  fontSize: "20px",
-                  textAlign: "center",
-                }
-          }
+          className={`absolute text-white font-bold 
+          lg:mt-[50vh] lg:text-[50px] lg:text-center 
+          md:mt-[40vh] md:text-[50px] md:text-center 
+          sm:mt-[20vh] sm:text-[20px] sm:text-center`}
         >
           Thanks for Joining Us ❤️
         </span>
       ) : (
         <>
           <div
-            className="absolute flex flex-row z-2"
-            style={
-              screen.width >= 1280
-                ? {
-                    gap: "10px",
-                    marginTop: "50vh",
-                  }
-                : screen.width >= 680
-                ? {
-                    gap: "10px",
-                    marginTop: "40vh",
-                  }
-                : {
-                    gap: "10px",
-                    marginTop: "20vh",
-                  }
-            }
+            className={`absolute flex flex-row z-2 
+            lg:gap-10 lg:mt-[50vh] 
+            md:gap-10 md:mt-[40vh] 
+            sm:gap-10 sm:mt-[20vh]`}
           >
             <input
-              className=""
+              className="px-5 py-2 rounded-lg"
               type="email"
               placeholder="Enter your Email"
-              style={
-                screen.width >= 1280
-                  ? {
-                      padding: "5px 10px",
-                      borderRadius: "10px",
-                    }
-                  : screen.width >= 680
-                  ? { padding: "5px 10px", borderRadius: "10px" }
-                  : { padding: "5px 10px", borderRadius: "10px" }
-              }
               value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
+              onChange={(e) => setEmail(e.target.value)}
             />
 
             <button
-              className="bg-[#0050FC] text-white font-bold"
-              style={
-                screen.width >= 1280
-                  ? {
-                      padding: "5px 10px",
-                      borderRadius: "10px",
-                    }
-                  : screen.width >= 680
-                  ? { padding: "5px 10px", borderRadius: "10px" }
-                  : { padding: "5px 10px", borderRadius: "10px" }
-              }
+              className="bg-[#0050FC] text-white font-bold px-5 py-2 rounded-lg"
               onClick={handleEmail}
             >
               Sign Up
@@ -227,31 +96,12 @@ export default function App() {
           </div>
 
           <span
-            className="text-white z-4"
-            style={
-              screen.width >= 1280
-                ? {
-                    marginTop: "70vh",
-                    fontSize: "20px",
-                    width: "40vw",
-                    textAlign: "center",
-                  }
-                : screen.width >= 680
-                ? {
-                    marginTop: "60vh",
-                    fontSize: "15px",
-                    width: "60vw",
-                    textAlign: "center",
-                  }
-                : {
-                    marginTop: "35vh",
-                    fontSize: "10px",
-                    width: "70vw",
-                    textAlign: "center",
-                  }
-            }
+            className={`text-white z-4 text-center 
+            lg:mt-[70vh] lg:text-[20px] lg:w-[40vw] 
+            md:mt-[60vh] md:text-[15px] md:w-[60vw] 
+            sm:mt-[35vh] sm:text-[10px] sm:w-[70vw]`}
           >
-            In the meantime, Sign up now for free premium access—exclusive to
+            In the meantime, Sign up now for free premium access exclusive to
             early registrants!
           </span>
         </>

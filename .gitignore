@@ -3,11 +3,8 @@ node_modules
 .env
 *env
 .vscode*
-
-
-
-
-
+*.pptx
+/dist
 
 # Document
 
