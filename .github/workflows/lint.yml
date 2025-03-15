@@ -1,0 +1,25 @@
+name: Lint check on PR
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - ready_for_review
+
+jobs:
+  pr-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🔍 Check for Merge Conflicts
+        run: |
+          git fetch origin master
+          git merge --no-commit --no-ff origin/master || (echo "❌ Merge conflict detected!" && exit 1)
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Running lint
+        run: npm run lint
