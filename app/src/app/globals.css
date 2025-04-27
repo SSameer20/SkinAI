@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+:root {
+  --foreground: #f7f7f8;
+  --background: #0c0c0e;
+  --color-woodsmoke-50: #f7f7f8;
+  --color-woodsmoke-100: #eeeef0;
+  --color-woodsmoke-200: #d8d9df;
+  --color-woodsmoke-300: #b6b7c3;
+  --color-woodsmoke-400: #8f91a1;
+  --color-woodsmoke-500: #717286;
+  --color-woodsmoke-600: #5b5d6e;
+  --color-woodsmoke-700: #4a4a5a;
+  --color-woodsmoke-800: #40414c;
+  --color-woodsmoke-900: #383842;
+  --color-woodsmoke-950: #0c0c0e;
+  --color-shamrock-50: #effef8;
+  --color-shamrock-100: #d9fff0;
+  --color-shamrock-200: #b5fde1;
+  --color-shamrock-300: #7cf9ca;
+  --color-shamrock-400: #22eaa0;
+  --color-shamrock-500: #12d58e;
+  --color-shamrock-600: #08b173;
+  --color-shamrock-700: #0b8a5c;
+  --color-shamrock-800: #0e6d4b;
+  --color-shamrock-900: #0e5940;
+  --color-shamrock-950: #013222;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #0c0c0e;
+    --foreground: #f7f7f8;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

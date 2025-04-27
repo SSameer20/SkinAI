@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@nextui-org/react": "^2.6.11",
+    "autoprefixer": "^10.4.21",
+    "framer-motion": "^12.6.3",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.3"
+  }
+}
