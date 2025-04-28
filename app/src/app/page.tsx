@@ -4,6 +4,7 @@ import { Hospital } from "lucide-react";
 
 import WorkSection from "@/components/Works";
 import HeroImage from "@/components/HeroImage";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -30,12 +31,11 @@ export default function Home() {
         </h1>
         <div className="flex gap-2 items-center justify-center py-2 px-4 border-2 rounded-xl border-none bg-[var(--color-shamrock-400)] hover:bg-[var(--color-shamrock-600)] cursor-pointer transition-all">
           <span className="text-[12px] flex gap-2 items-center justify-center text-[var(--color-woodsmoke-950)]">
-            Test Your Skin
+            <Link href="/dashboard">Test Your Skin</Link>
           </span>
         </div>
 
-          <HeroImage />
-        
+        <HeroImage />
       </div>
       <WorkSection className="" />
       <footer className="w-full border-t mt-12">
