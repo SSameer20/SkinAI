@@ -2,8 +2,13 @@ from flask import Flask, request, jsonify
 import tensorflow as tf
 import numpy as np
 from PIL import Image
+from flask_cors import CORS
+
+
 
 app = Flask(__name__)
+CORS(app)
+
 
 # Load the trained model
 model = tf.keras.models.load_model("./model/image_classifier_model.h5")
@@ -37,10 +42,18 @@ class_names = [
 
 # Image preprocessing
 def preprocess_image(image):
-    image = image.resize((224, 224))  # <-- Change this to 224x224
-    image = np.array(image) / 255.0
-    image = np.expand_dims(image, axis=0)
+    image = image.convert('RGB')             # Ensure RGB
+    image = image.resize((224, 224))         # Resize to model input size
+    image = np.array(image) / 255.0          # Normalize
+    image = np.expand_dims(image, axis=0)    # Add batch dimension
     return image
+
+@app.route('/')
+def home():
+    return 'SkinAI Flask Server is running'
+
+
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -58,5 +71,5 @@ def predict():
     return jsonify({'class': predicted_class, 'confidence': confidence})
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
