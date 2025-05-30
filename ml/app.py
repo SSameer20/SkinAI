@@ -42,10 +42,12 @@ class_names = [
 
 # Image preprocessing
 def preprocess_image(image):
-    image = image.resize((224, 224))  # <-- Change this to 224x224
-    image = np.array(image) / 255.0
-    image = np.expand_dims(image, axis=0)
+    image = image.convert('RGB')             # Ensure RGB
+    image = image.resize((224, 224))         # Resize to model input size
+    image = np.array(image) / 255.0          # Normalize
+    image = np.expand_dims(image, axis=0)    # Add batch dimension
     return image
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
