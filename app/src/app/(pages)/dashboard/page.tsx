@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@nextui-org/react";
 import { Image } from "lucide-react";
 import { useRef, useState } from "react";
 import { useSetRecoilState } from "recoil";
@@ -58,12 +57,12 @@ export default function Page() {
           />
         </div>
         <div className="w-full h-1/5 flex items-center">
-          <Button
+          <button
             className="flex sbg-blue-500 rounded-[5px] text-white font-bold hover:bg-white hover:text-black border-2 border-amber-50 px-5 py-2 hover:border-none transition-all"
-            onPress={handleSubmit}
+            onClick={handleSubmit}
           >
             {!loading ? "Submit" : "Loading.."}
-          </Button>
+          </button>
         </div>
       </div>
     </div>
