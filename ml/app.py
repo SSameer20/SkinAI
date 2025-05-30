@@ -15,7 +15,6 @@ app = Flask(__name__)
 CORS(app)
 
 # Load the model once at startup
-model = tf.keras.models.load_model("./model/image_classifier_model.h5")
 
 # Define class names
 class_names = [
@@ -60,6 +59,7 @@ def home():
 # Predict route
 @app.route('/predict', methods=['POST'])
 def predict():
+    model = tf.keras.models.load_model("./model/image_classifier_model.h5")
     try:
         if 'file' not in request.files:
             return jsonify({'error': 'No file uploaded'}), 400
