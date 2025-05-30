@@ -14,16 +14,11 @@ datasource db {
 }
 
 
-model User{
-  Id        Int       @id         @default(autoincrement())
-  Email     String    @unique
+model User {
+  ID        Int      @id @default(autoincrement())
+  Email     String   @unique
   Password  String
-  History   Test[]    
-}
-
-
-model Test{
-  Id        Int       @id         @default(autoincrement())
-  UserId    Int
-  User      User @relation(fields: [UserId], references: [Id])
+  FirstName String
+  LastName  String
+  Phone     String
 }
