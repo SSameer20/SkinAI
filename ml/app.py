@@ -1,16 +1,20 @@
 from flask import Flask, request, jsonify
-import tensorflow as tf
-import numpy as np
-from PIL import Image
 from flask_cors import CORS
+from PIL import Image
+import numpy as np
+import tensorflow as tf
+import logging
+import os
 
+# Disable TensorFlow GPU logs (optional)
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+logging.getLogger('tensorflow').setLevel(logging.FATAL)
 
-
+# Initialize Flask app
 app = Flask(__name__)
 CORS(app)
 
-
-# Load the trained model
+# Load the model once at startup
 model = tf.keras.models.load_model("./model/image_classifier_model.h5")
 
 # Define class names
@@ -40,36 +44,44 @@ class_names = [
     'Warts Molluscum and other Viral Infections'
 ]
 
-# Image preprocessing
+# Preprocess the uploaded image
 def preprocess_image(image):
-    image = image.convert('RGB')             # Ensure RGB
-    image = image.resize((224, 224))         # Resize to model input size
-    image = np.array(image) / 255.0          # Normalize
-    image = np.expand_dims(image, axis=0)    # Add batch dimension
+    image = image.convert('RGB')
+    image = image.resize((224, 224))
+    image = np.array(image, dtype=np.float32) / 255.0
+    image = np.expand_dims(image, axis=0)
     return image
 
+# Health check route
 @app.route('/')
 def home():
-    return 'SkinAI Flask Server is running'
+    return 'SkinAI Flask Server is running!'
 
-
-
-
+# Predict route
 @app.route('/predict', methods=['POST'])
 def predict():
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file uploaded'}), 400
-    file = request.files['file']
-    image = Image.open(file)
-    processed_image = preprocess_image(image)
+    try:
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file uploaded'}), 400
 
-    logits = model.predict(processed_image)
-    predictions = tf.nn.softmax(logits).numpy()
-    predicted_class = class_names[np.argmax(predictions)]
-    confidence = float(np.max(predictions))
+        file = request.files['file']
+        image = Image.open(file)
 
-    return jsonify({'class': predicted_class, 'confidence': confidence})
+        processed_image = preprocess_image(image)
+        logits = model.predict(processed_image)
+        predictions = tf.nn.softmax(logits).numpy()
 
+        predicted_class = class_names[np.argmax(predictions)]
+        confidence = float(np.max(predictions))
 
+        return jsonify({
+            'class': predicted_class,
+            'confidence': round(confidence, 4)
+        })
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# Run locally only
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
