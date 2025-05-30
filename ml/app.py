@@ -2,8 +2,13 @@ from flask import Flask, request, jsonify
 import tensorflow as tf
 import numpy as np
 from PIL import Image
+from flask_cors import CORS
+
+
 
 app = Flask(__name__)
+CORS(app)
+
 
 # Load the trained model
 model = tf.keras.models.load_model("./model/image_classifier_model.h5")
@@ -58,5 +63,5 @@ def predict():
     return jsonify({'class': predicted_class, 'confidence': confidence})
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
