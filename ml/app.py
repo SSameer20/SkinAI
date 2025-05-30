@@ -48,6 +48,12 @@ def preprocess_image(image):
     image = np.expand_dims(image, axis=0)    # Add batch dimension
     return image
 
+@app.route('/')
+def home():
+    return 'SkinAI Flask Server is running'
+
+
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
