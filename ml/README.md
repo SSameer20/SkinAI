@@ -11,3 +11,5 @@
 - `.\venv\Scripts\activate`
 - Install Dependencies
 - `pip install -r requirements.txt`
+
+- `python app.py`
