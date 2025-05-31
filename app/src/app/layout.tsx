@@ -1,8 +1,8 @@
+"use client";
 // import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-import { Providers } from "@/utils/RecoilProvider";
+import { RecoilRoot } from "recoil";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,13 +43,13 @@ export default function RootLayout({
       <head>
         <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon" />
       </head>
-      <Providers>
+      <RecoilRoot>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased w-screen h-screen overflow-x-hidden`}
         >
           <div>{children}</div>
         </body>
-      </Providers>
+      </RecoilRoot>
     </html>
   );
 }

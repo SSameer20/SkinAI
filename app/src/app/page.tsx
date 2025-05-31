@@ -3,13 +3,15 @@ import Navigation from "@/components/Navigation";
 import { Hospital } from "lucide-react";
 import WorkSection from "@/components/Works";
 import HeroImage from "@/components/HeroImage";
-import Link from "next/link";
 import { Kaisei_Opti } from "next/font/google";
 const kaiseiOpti = Kaisei_Opti({
   weight: "400",
   subsets: ["latin"],
 });
 export default function Home() {
+  function handleTest() {
+    window.location.href = "/login";
+  }
   return (
     <div className="w-screen overflow-x-hidden overflow-y-auto scrollbar-hide">
       <Navigation />
@@ -35,7 +37,7 @@ export default function Home() {
         </h1>
         <div className="flex gap-2 items-center justify-center py-2 px-4 border-2 rounded-xl border-none bg-[var(--color-shamrock-400)] hover:bg-[var(--color-shamrock-600)] cursor-pointer transition-all">
           <span className="text-[12px] flex gap-2 items-center justify-center text-[var(--color-woodsmoke-950)]">
-            <Link href="/dashboard">Test Your Skin</Link>
+            <button onClick={handleTest}>Test Your Skin</button>
           </span>
         </div>
 

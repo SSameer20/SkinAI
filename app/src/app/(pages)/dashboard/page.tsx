@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useState } from "react";
 import {
@@ -8,6 +9,7 @@ import {
   AlertTriangle,
   Loader2,
 } from "lucide-react";
+import { getSkinConditionInfo, SkinConditionResult } from "@/utils/helper";
 
 type FileType = File | null;
 
@@ -15,10 +17,8 @@ export default function Dashboard() {
   const [dragActive, setDragActive] = useState<boolean>(false);
   const [uploadedFile, setUploadedFile] = useState<FileType>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [analysisResult, setAnalysisResult] = useState<{
-    class: string;
-    confidence: number;
-  } | null>(null);
+  const [analysisResult, setAnalysisResult] =
+    useState<SkinConditionResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const handleDrag = (e: React.DragEvent<HTMLDivElement>) => {
@@ -42,6 +42,10 @@ export default function Dashboard() {
         setUploadedFile(file);
         setError(null);
         setAnalysisResult(null);
+      } else {
+        setUploadedFile(null);
+        setError("Please upload a valid image file.");
+        setAnalysisResult(null);
       }
     }
   };
@@ -49,9 +53,15 @@ export default function Dashboard() {
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
       const file = e.target.files[0];
-      setUploadedFile(file);
-      setError(null);
-      setAnalysisResult(null);
+      if (file.type.startsWith("image/")) {
+        setUploadedFile(file);
+        setError(null);
+        setAnalysisResult(null);
+      } else {
+        setUploadedFile(null);
+        setError("Please select a valid image file.");
+        setAnalysisResult(null);
+      }
     }
   };
 
@@ -71,18 +81,21 @@ export default function Dashboard() {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to process image");
+        // Simplified error display without complex parsing
+        throw new Error("Failed to process image. Please try again.");
       }
 
       const result = await response.json();
-      console.log("Analysis Result:", result);
-      setAnalysisResult(result);
+      const skinCondition = result.result;
+
+      const updatedResult = getSkinConditionInfo(skinCondition);
+
+      setAnalysisResult(updatedResult);
     } catch (err) {
-      console.error("Error:", err);
       setError(
         err instanceof Error ? err.message : "An unknown error occurred"
       );
+      setAnalysisResult(null);
     } finally {
       setIsProcessing(false);
     }
@@ -93,21 +106,19 @@ export default function Dashboard() {
       <div className="max-w-7xl mx-auto">
         {/* Header Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          {/* Accuracy Rate */}
           <div className="bg-blue-600 rounded-2xl p-6 relative overflow-hidden">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-blue-100 text-sm font-medium mb-1">
                   Accuracy Rate
                 </p>
-                <p className="text-white text-3xl font-bold">94.5%</p>
+                <p className="text-white text-3xl font-bold">80 - 90</p>
               </div>
               <Activity className="w-8 h-8 text-blue-200" />
             </div>
             <div className="absolute -bottom-2 -right-2 w-16 h-16 bg-blue-500 rounded-full opacity-20"></div>
           </div>
 
-          {/* Images Analyzed */}
           <div className="bg-green-600 rounded-2xl p-6 relative overflow-hidden">
             <div className="flex items-center justify-between">
               <div>
@@ -121,7 +132,6 @@ export default function Dashboard() {
             <div className="absolute -bottom-2 -right-2 w-16 h-16 bg-green-500 rounded-full opacity-20"></div>
           </div>
 
-          {/* Diseases Detected */}
           <div className="bg-purple-600 rounded-2xl p-6 relative overflow-hidden">
             <div className="flex items-center justify-between">
               <div>
@@ -146,7 +156,7 @@ export default function Dashboard() {
             </div>
 
             <div
-              className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-200 ${
+              className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-200 cursor-pointer ${
                 dragActive
                   ? "border-blue-500 bg-blue-500/10"
                   : "border-gray-600 hover:border-gray-500"
@@ -155,6 +165,7 @@ export default function Dashboard() {
               onDragLeave={handleDrag}
               onDragOver={handleDrag}
               onDrop={handleDrop}
+              onClick={() => document.getElementById("file-upload")?.click()}
             >
               <div className="mb-4">
                 <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
@@ -248,78 +259,30 @@ export default function Dashboard() {
                 </button>
               </div>
             ) : analysisResult ? (
-              <div className="space-y-4">
-                <div className="bg-gray-700 rounded-lg p-4">
-                  <h3 className="font-medium text-lg mb-2">Diagnosis</h3>
-                  <p className="text-blue-400">{analysisResult.class}</p>
-                </div>
-                <div className="bg-gray-700 rounded-lg p-4">
-                  <h3 className="font-medium text-lg mb-2">Confidence Level</h3>
-                  <div className="w-full bg-gray-600 rounded-full h-2.5">
-                    <div
-                      className="bg-blue-600 h-2.5 rounded-full"
-                      style={{ width: `${analysisResult.confidence * 100}%` }}
-                    ></div>
-                  </div>
-                  <p className="text-green-400 mt-2">
-                    {(analysisResult.confidence * 100).toFixed(2)}% confidence
-                  </p>
-                </div>
-                <button
-                  onClick={() => {
-                    setUploadedFile(null);
-                    setAnalysisResult(null);
-                  }}
-                  className="w-full mt-4 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-md"
-                >
-                  Analyze Another Image
-                </button>
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <AlertTriangle className="w-16 h-16 text-gray-500 mx-auto mb-4" />
-                <h3 className="text-xl font-medium text-gray-300 mb-2">
-                  No Analysis Available
+              <>
+                <h3 className="font-medium text-lg mt-4">
+                  {analysisResult.condition}
                 </h3>
-                <p className="text-gray-500">
-                  Upload a medical image to see analysis results
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
 
-        {/* Additional Info */}
-        <div className="mt-8 bg-gray-800 rounded-2xl p-6">
-          <h3 className="text-lg font-semibold mb-4">How It Works</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Upload className="w-6 h-6" />
-              </div>
-              <h4 className="font-medium mb-2">1. Upload Image</h4>
-              <p className="text-sm text-gray-400">
-                Upload your medical image in supported formats
+                <h4 className="font-medium text-lg mt-4">Description</h4>
+                <p className="text-gray-300 mb-6">
+                  {analysisResult.information.description}
+                </p>
+
+                <h4 className="font-medium text-lg mb-2">Precautions</h4>
+                <ul className="list-disc list-inside space-y-2 text-gray-400">
+                  {analysisResult.information.precautions.map(
+                    (precaution, i) => (
+                      <li key={i}>{precaution}</li>
+                    )
+                  )}
+                </ul>
+              </>
+            ) : (
+              <p className="text-gray-500 text-center mt-12">
+                Upload an image to see analysis results here.
               </p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Brain className="w-6 h-6" />
-              </div>
-              <h4 className="font-medium mb-2">2. AI Analysis</h4>
-              <p className="text-sm text-gray-400">
-                Our AI analyzes the image using advanced algorithms
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Activity className="w-6 h-6" />
-              </div>
-              <h4 className="font-medium mb-2">3. Get Results</h4>
-              <p className="text-sm text-gray-400">
-                Receive detailed analysis and detection results
-              </p>
-            </div>
+            )}
           </div>
         </div>
       </div>
