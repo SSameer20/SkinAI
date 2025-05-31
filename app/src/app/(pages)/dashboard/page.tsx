@@ -6,12 +6,20 @@ import {
   FileImage,
   Brain,
   AlertTriangle,
+  Loader2,
 } from "lucide-react";
 
-type FileType = { name: string; size: number; type: string };
+type FileType = File | null;
+
 export default function Dashboard() {
   const [dragActive, setDragActive] = useState<boolean>(false);
-  const [uploadedFile, setUploadedFile] = useState<FileType | null>(null);
+  const [uploadedFile, setUploadedFile] = useState<FileType>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [analysisResult, setAnalysisResult] = useState<{
+    class: string;
+    confidence: number;
+  } | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleDrag = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -28,21 +36,57 @@ export default function Dashboard() {
     e.stopPropagation();
     setDragActive(false);
 
-    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+    if (e.dataTransfer?.files?.[0]) {
       const file = e.dataTransfer.files[0];
       if (file.type.startsWith("image/")) {
         setUploadedFile(file);
+        setError(null);
+        setAnalysisResult(null);
       }
     }
   };
 
-  // Note: This should be React.ChangeEvent<HTMLInputElement>, not a DragEvent
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
+    if (e.target.files?.[0]) {
       const file = e.target.files[0];
       setUploadedFile(file);
+      setError(null);
+      setAnalysisResult(null);
     }
   };
+
+  async function handleSubmit() {
+    if (!uploadedFile) return;
+
+    try {
+      setIsProcessing(true);
+      setError(null);
+
+      const formData = new FormData();
+      formData.append("file", uploadedFile);
+
+      const response = await fetch("http://localhost:5000/predict", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to process image");
+      }
+
+      const result = await response.json();
+      console.log("Analysis Result:", result);
+      setAnalysisResult(result);
+    } catch (err) {
+      console.error("Error:", err);
+      setError(
+        err instanceof Error ? err.message : "An unknown error occurred"
+      );
+    } finally {
+      setIsProcessing(false);
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6">
@@ -70,7 +114,7 @@ export default function Dashboard() {
                 <p className="text-green-100 text-sm font-medium mb-1">
                   Images Analyzed
                 </p>
-                <p className="text-white text-3xl font-bold">12,847</p>
+                <p className="text-white text-3xl font-bold">12</p>
               </div>
               <FileImage className="w-8 h-8 text-green-200" />
             </div>
@@ -84,7 +128,7 @@ export default function Dashboard() {
                 <p className="text-purple-100 text-sm font-medium mb-1">
                   Diseases Detected
                 </p>
-                <p className="text-white text-3xl font-bold">45+</p>
+                <p className="text-white text-3xl font-bold">23+</p>
               </div>
               <Brain className="w-8 h-8 text-purple-200" />
             </div>
@@ -139,11 +183,25 @@ export default function Dashboard() {
             </div>
 
             {uploadedFile && (
-              <div className="mt-4 p-4 bg-gray-700 rounded-lg">
+              <div className="mt-4 p-4 bg-gray-700 rounded-lg flex justify-between items-center">
                 <p className="text-sm text-gray-300">
                   Selected file:{" "}
                   <span className="text-white">{uploadedFile.name}</span>
                 </p>
+                <button
+                  onClick={handleSubmit}
+                  disabled={isProcessing}
+                  className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                >
+                  {isProcessing ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Processing...
+                    </>
+                  ) : (
+                    "Analyze Image"
+                  )}
+                </button>
               </div>
             )}
 
@@ -165,24 +223,67 @@ export default function Dashboard() {
               <h2 className="text-xl font-semibold">Analysis Results</h2>
             </div>
 
-            <div className="text-center py-12">
-              <AlertTriangle className="w-16 h-16 text-gray-500 mx-auto mb-4" />
-              <h3 className="text-xl font-medium text-gray-300 mb-2">
-                No Analysis Available
-              </h3>
-              <p className="text-gray-500">
-                Upload a medical image to see analysis results
-              </p>
-            </div>
-
-            {uploadedFile && (
-              <div className="mt-8 p-4 bg-blue-600/10 border border-blue-600/20 rounded-lg">
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                  <p className="text-blue-400 text-sm">
-                    Processing image analysis...
+            {isProcessing ? (
+              <div className="text-center py-12">
+                <Loader2 className="w-16 h-16 text-blue-500 animate-spin mx-auto mb-4" />
+                <h3 className="text-xl font-medium text-gray-300 mb-2">
+                  Analyzing Image
+                </h3>
+                <p className="text-gray-500">
+                  Our AI is processing your medical image
+                </p>
+              </div>
+            ) : error ? (
+              <div className="text-center py-12">
+                <AlertTriangle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+                <h3 className="text-xl font-medium text-gray-300 mb-2">
+                  Analysis Failed
+                </h3>
+                <p className="text-red-400 mb-4">{error}</p>
+                <button
+                  onClick={() => setError(null)}
+                  className="text-sm text-gray-400 hover:text-white underline"
+                >
+                  Try again
+                </button>
+              </div>
+            ) : analysisResult ? (
+              <div className="space-y-4">
+                <div className="bg-gray-700 rounded-lg p-4">
+                  <h3 className="font-medium text-lg mb-2">Diagnosis</h3>
+                  <p className="text-blue-400">{analysisResult.class}</p>
+                </div>
+                <div className="bg-gray-700 rounded-lg p-4">
+                  <h3 className="font-medium text-lg mb-2">Confidence Level</h3>
+                  <div className="w-full bg-gray-600 rounded-full h-2.5">
+                    <div
+                      className="bg-blue-600 h-2.5 rounded-full"
+                      style={{ width: `${analysisResult.confidence * 100}%` }}
+                    ></div>
+                  </div>
+                  <p className="text-green-400 mt-2">
+                    {(analysisResult.confidence * 100).toFixed(2)}% confidence
                   </p>
                 </div>
+                <button
+                  onClick={() => {
+                    setUploadedFile(null);
+                    setAnalysisResult(null);
+                  }}
+                  className="w-full mt-4 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-md"
+                >
+                  Analyze Another Image
+                </button>
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <AlertTriangle className="w-16 h-16 text-gray-500 mx-auto mb-4" />
+                <h3 className="text-xl font-medium text-gray-300 mb-2">
+                  No Analysis Available
+                </h3>
+                <p className="text-gray-500">
+                  Upload a medical image to see analysis results
+                </p>
               </div>
             )}
           </div>
