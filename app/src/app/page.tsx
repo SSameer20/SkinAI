@@ -1,15 +1,19 @@
+"use client";
 import Navigation from "@/components/Navigation";
-import { kaiseiOpti } from "./layout";
 import { Hospital } from "lucide-react";
-
 import WorkSection from "@/components/Works";
 import HeroImage from "@/components/HeroImage";
 import Link from "next/link";
-
+import { Kaisei_Opti } from "next/font/google";
+const kaiseiOpti = Kaisei_Opti({
+  weight: "400",
+  subsets: ["latin"],
+});
 export default function Home() {
   return (
     <div className="w-screen overflow-x-hidden overflow-y-auto scrollbar-hide">
       <Navigation />
+
       <div
         className={`relative flex flex-col justify-start items-center min-h-[100vh] w-screen gap-10`}
       >

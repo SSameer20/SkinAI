@@ -1,11 +1,18 @@
-import { kaiseiOpti } from "@/app/layout";
 import Link from "next/link";
+import { useRecoilValue } from "recoil";
+import { UserAtom } from "@/store/User";
+import { Kaisei_Opti } from "next/font/google";
 
 interface propType {
   className?: string;
 }
+const kaiseiOpti = Kaisei_Opti({
+  weight: "400",
+  subsets: ["latin"],
+});
 export default function Navigation({ className }: propType) {
-  const user = null;
+  const user = useRecoilValue(UserAtom);
+
   return (
     <div className={`${className} ${styles.nav}`}>
       <span className={`${styles.logo} ${kaiseiOpti.className}`}>SKINAI</span>
