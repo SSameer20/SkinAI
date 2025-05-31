@@ -118,7 +118,10 @@ export default function LoginPage() {
           <div className="mt-8 text-center">
             <p className="text-gray-400">
               Dont have an account?
-              <button className="text-blue-400 hover:text-blue-300 font-medium transition-colors">
+              <button
+                className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
+                onClick={() => window.location.replace("/register")}
+              >
                 Sign up
               </button>
             </p>

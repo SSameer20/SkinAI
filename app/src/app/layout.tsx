@@ -1,7 +1,8 @@
 // import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Provider from "@/utils/Provider";
+
+import { Providers } from "@/utils/RecoilProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,13 +43,13 @@ export default function RootLayout({
       <head>
         <link rel="shortcut icon" href="/logo.jpg" type="image/x-icon" />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased w-screen h-screen overflow-x-hidden`}
-      >
-        <Provider>
+      <Providers>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased w-screen h-screen overflow-x-hidden`}
+        >
           <div>{children}</div>
-        </Provider>
-      </body>
+        </body>
+      </Providers>
     </html>
   );
 }

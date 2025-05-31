@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { useRecoilValue } from "recoil";
-import { UserAtom } from "@/store/User";
+// import { useRecoilValue } from "recoil";
+// import { UserAtom } from "@/store/User";
 import { Kaisei_Opti } from "next/font/google";
 
 interface propType {
@@ -11,7 +11,7 @@ const kaiseiOpti = Kaisei_Opti({
   subsets: ["latin"],
 });
 export default function Navigation({ className }: propType) {
-  const user = useRecoilValue(UserAtom);
+  const user = null;
 
   return (
     <div className={`${className} ${styles.nav}`}>
@@ -29,7 +29,7 @@ export default function Navigation({ className }: propType) {
         )}
         {user == null && (
           <>
-            <Link href="/auth/login" className="group">
+            <Link href="/login" className="group">
               <div
                 className={`relative overflow-hidden ${styles.links} ${styles.login} ${styles.animation}`}
               >
@@ -39,7 +39,7 @@ export default function Navigation({ className }: propType) {
               </div>
             </Link>
 
-            <Link href="/auth/register">
+            <Link href="/register">
               <div className={`${styles.links} ${styles.register}`}>
                 Register
               </div>

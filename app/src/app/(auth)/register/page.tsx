@@ -44,7 +44,7 @@ export default function RegisterPage() {
       const data: AuthResponse = await response.json();
       if (data.User) {
         UserState(data.User);
-        window.location.href = "/auth/login";
+        window.location.href = "/login";
         return;
       }
       throw new Error("User data not found in response");
@@ -226,7 +226,10 @@ export default function RegisterPage() {
           <div className="mt-8 text-center">
             <p className="text-gray-400">
               Already have an account?{" "}
-              <button className="text-blue-400 hover:text-blue-300 font-medium transition-colors">
+              <button
+                className="text-blue-400 hover:text-blue-300 font-medium transition-colors"
+                onClick={() => window.location.replace("/login")}
+              >
                 Sign in
               </button>
             </p>
